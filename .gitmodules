@@ -43,3 +43,18 @@
 [submodule "wobble-audio-api"]
 	path = wobble-audio-api
 	url = https://github.com/koteitan/wobble-audio-api.git
+[submodule "4D8-HACK"]
+	path = 4D8-HACK
+	url = https://github.com/koteitan/js-sprite-game.git
+	branch = 4droguelike
+[submodule "4dbill"]
+	path = 4dbill
+	url = https://github.com/koteitan/4dsoko.git
+	branch = 4dbill
+[submodule "4dtron"]
+	path = 4dtron
+	url = https://github.com/koteitan/4dsoko.git
+	branch = 4dtron
+[submodule "js-sprite-game"]
+	path = js-sprite-game
+	url = https://github.com/koteitan/js-sprite-game.git
