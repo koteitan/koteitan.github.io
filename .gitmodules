@@ -1,3 +1,45 @@
 [submodule "GoogolMaps2.0"]
 	path = GoogolMaps2.0
 	url = https://github.com/koteitan/GoogolMaps2.0.git
+[submodule "hydraviewer"]
+	path = hydraviewer
+	url = https://github.com/koteitan/hydraviewer.git
+[submodule "yaBMS"]
+	path = yaBMS
+	url = https://github.com/koteitan/yaBMS.git
+[submodule "OrdinalMahjong"]
+	path = OrdinalMahjong
+	url = https://github.com/koteitan/OrdinalMahjong.git
+[submodule "binarychess"]
+	path = binarychess
+	url = https://github.com/koteitan/binarychess.git
+[submodule "4dsoko"]
+	path = 4dsoko
+	url = https://github.com/koteitan/4dsoko.git
+[submodule "quantumtrump"]
+	path = quantumtrump
+	url = https://github.com/koteitan/quantumtrump.git
+[submodule "treemap-js"]
+	path = treemap-js
+	url = https://github.com/koteitan/treemap-js.git
+[submodule "BeklemishevsWorms"]
+	path = BeklemishevsWorms
+	url = https://github.com/koteitan/BeklemishevsWorms.git
+[submodule "vrchecker"]
+	path = vrchecker
+	url = https://github.com/koteitan/vrchecker.git
+[submodule "starlabel"]
+	path = starlabel
+	url = https://github.com/koteitan/starlabel.git
+[submodule "cs4d"]
+	path = cs4d
+	url = https://github.com/koteitan/cs4d.git
+[submodule "4dgolf"]
+	path = 4dgolf
+	url = https://github.com/koteitan/4dgolf.git
+[submodule "idgomoku"]
+	path = idgomoku
+	url = https://github.com/koteitan/idgomoku.git
+[submodule "wobble-audio-api"]
+	path = wobble-audio-api
+	url = https://github.com/koteitan/wobble-audio-api.git
