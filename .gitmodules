@@ -61,3 +61,6 @@
 [submodule "paintgraph"]
 	path = paintgraph
 	url = https://github.com/koteitan/paintgraph.git
+[submodule "BMSHydraViewer"]
+	path = BMSHydraViewer
+	url = https://github.com/koteitan/BMSHydraViewer.git
