@@ -64,3 +64,6 @@
 [submodule "BMSHydraViewer"]
 	path = BMSHydraViewer
 	url = https://github.com/koteitan/BMSHydraViewer.git
+[submodule "yseq"]
+	path = yseq
+	url = https://github.com/koteitan/yseq
