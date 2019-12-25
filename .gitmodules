@@ -67,3 +67,6 @@
 [submodule "yseq"]
 	path = yseq
 	url = https://github.com/koteitan/yseq
+[submodule "ackpuzzle"]
+	path = ackpuzzle
+	url = https://github.com/koteitan/ackermann-puzzle.git
