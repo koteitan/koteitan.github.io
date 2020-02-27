@@ -73,3 +73,6 @@
 [submodule "vsakko"]
 	path = vsakko
 	url = https://github.com/koteitan/vsakko
+[submodule "bintube"]
+	path = bintube
+	url = https://github.com/koteitan/bintube.git
