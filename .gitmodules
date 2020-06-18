@@ -76,3 +76,6 @@
 [submodule "bintube"]
 	path = bintube
 	url = https://github.com/koteitan/bintube.git
+[submodule "zoomdot"]
+	path = zoomdot
+	url = https://github.com/koteitan/zoomdot
