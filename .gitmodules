@@ -82,3 +82,6 @@
 [submodule "whYmountain"]
 	path = whYmountain
 	url = https://github.com/koteitan/whYmountain
+[submodule "grzeseq"]
+	path = grzeseq
+	url = https://github.com/koteitan/grzeseq/
