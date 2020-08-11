@@ -1,43 +1,44 @@
- <html>
-   <head>
-     <script><!--
-       var doall=function(){
-         s=eval(form1.in.value);
-         e=expand(s);
-         //出力欄
-         form1.out.value = form1.out.value+"["+e.toString()+"]"+"\n";
-         //入力欄
-         form1.in.value = "["+e.toString()+"]";
-       };
-       var expand=function(s){
-         len=s.length;          //len =長さ
-         c=s[len-1];            //c   =子の値
-         e=s.slice(0,len-1);    //e   =展開後の数列
-         
-         if(c==0){ // 子が 0 のとき
-           //子を刈るだけで何もしない
-         }else{
-           //bad root 探索
-           for(x=len-2;x>=0;x--){
-             if(s[x]<c){
-               r=x;             //r = bad root
-               break;
-             }
-           }
-           //bad part r～len-1 をコピーする
-           for(x=r;x<len-1;x++){
-             e.push(s[x]);
-           }
-         }
-         return e;
-       };
-   //--></script>
-   </head>
-   <body>
-     <form id=form1>
-       <textarea id=in cols=60>[0,1,2,3]</textarea><br>
-       <input id=expandbutton type=button value=expand onclick="javascript:doall();"/><br>
-       <textarea id=out cols=60 rows=20></textarea>
-     </form>
-   </body>
- </html>
+<html>
+  <head>
+    <script><!--
+      var doall=function(){
+        s=JSON.parse(form1.in.value);
+        e=expand(s);
+        //出力欄
+        form1.out.value = form1.out.value+JSON.stringify(e)+"\n";
+        //入力欄
+        form1.in.value = JSON.stringify(e);
+      };
+      var expand=function(s){
+        len=s.length;          //len =長さ
+        c=s[len-1];            //c   =子の値
+        e=s.slice(0,len-1);    //e   =展開後の数列
+        
+        if(c==0){ // 子が 0 のとき
+          //子を刈るだけで何もしない
+        }else{
+          //bad root 探索
+          for(x=len-2;x>=0;x--){
+            if(s[x]<c){
+              r=x;             //r = bad root
+              break;
+            }
+          }
+          //bad part r～len-1 をコピーする
+          for(x=r;x<len-1;x++){
+            e.push(s[x]);
+          }
+        }
+        return e;
+      };
+  //--></script>
+  </head>
+  <body>
+    <form id=form1>
+      <textarea id=in cols=60>[0,1,2,3]</textarea><br>
+      <input id=expandbutton type=button value=expand onclick="javascript:doall();"/><br>
+      <textarea id=out cols=60 rows=20></textarea>
+    </form>
+  </body>
+  <address>This program is on <a href="https://github.com/koteitan/koteitan.github.io/lecture/prss.html">github</a></address>
+</html>
