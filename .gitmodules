@@ -85,3 +85,6 @@
 [submodule "grzeseq"]
 	path = grzeseq
 	url = https://github.com/koteitan/grzeseq/
+[submodule "ordex"]
+	path = ordex
+	url = git@github.com:koteitan/ordex.git
