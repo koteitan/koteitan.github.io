@@ -88,3 +88,6 @@
 [submodule "ordex"]
 	path = ordex
 	url = git@github.com:koteitan/ordex.git
+[submodule "dy"]
+	path = dbms2y
+	url = git@github.com:koteitan/DimensionalYSequenceSource.git
