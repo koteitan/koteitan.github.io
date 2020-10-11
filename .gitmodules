@@ -93,4 +93,4 @@
 	url = git@github.com:koteitan/DimensionalYSequenceSource.git
 [submodule "dbms2y"]
 	path = dbms2y
-	url = git@github.com:koteitan/DimensionalYSequenceSource.git
+	url = https://github.com/koteitan/DimensionalYSequenceSource.git
