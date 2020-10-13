@@ -91,3 +91,6 @@
 [submodule "dy"]
 	path = dbms2y
 	url = https://github.com/koteitan/DimensionalYSequenceSource.git
+[submodule "hamkyodai"]
+	path = hamkyodai
+	url = https://github.com/koteitan/Kyodai.git
