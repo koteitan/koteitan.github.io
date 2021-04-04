@@ -98,3 +98,6 @@
 	path = ordex-staged
 	url = https://github.com/koteitan/ordex/
 	branch = develop
+[submodule "wy"]
+	path = wy
+	url = git@github.cim:koteitan/wy.git
