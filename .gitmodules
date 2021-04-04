@@ -94,3 +94,7 @@
 [submodule "hamkyodai"]
 	path = hamkyodai
 	url = https://github.com/koteitan/Kyodai.git
+[submodule "ordex-staged"]
+	path = ordex-staged
+	url = https://github.com/koteitan/ordex/
+	branch = develop
