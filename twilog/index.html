@@ -1,0 +1,30 @@
+<html><head><title>twilog/koteitan</title>
+<link rel="icon" type="image/png" sizes="32x32" href="https://twilog.org/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+function word_search(dv){
+	var param = {}
+	param["word"] = encodeURIComponent($("#wsearch-"+dv+" input[name='word']").val());
+	param["ao"] = "a";
+	if(!param["word"]) { alert("input word"); return; }
+	var ar = [];
+	for(k in param){
+		if(param[k]=="") continue;
+		ar.push(k + "=" + param[k]);
+	}
+	location.href = "https://twilog.org/koteitan/search?" + ar.join("&");
+}
+//</script>
+</head><body>
+twilog/koteitan <form id="wsearch-pc" method="get" onsubmit="word_search('pc');return false;" action="https://twilog.org/koteitan/search">
+<input type="hidden" name="param" value="desc">
+<input type="text" name="word" id="word" value="">
+<input type="submit" value="search">
+</form>
+<script>
+window.onload=function(){
+  document.getElementById("word").focus();
+}
+//</script>
+</body></html>
+
