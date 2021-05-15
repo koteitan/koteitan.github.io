@@ -101,3 +101,6 @@
 [submodule "wy"]
 	path = wy
 	url = https://github.com/koteitan/wy.git
+[submodule "kuma3arypsinum"]
+	path = kuma3arypsinum
+	url = https://github.com/koteitan/kuma3arypsinum.git
