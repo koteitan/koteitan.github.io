@@ -104,3 +104,6 @@
 [submodule "kuma3arypsinum"]
 	path = kuma3arypsinum
 	url = https://github.com/koteitan/kuma3arypsinum.git
+[submodule "kumawormseq"]
+	path = kumawormseq
+	url = https://github.com/koteitan/kumawormseq.git
