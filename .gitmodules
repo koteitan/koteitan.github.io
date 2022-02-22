@@ -107,3 +107,6 @@
 [submodule "kumawormseq"]
 	path = kumawormseq
 	url = https://github.com/koteitan/kumawormseq.git
+[submodule "mvebh"]
+	path = mvebh
+	url = git@github.com:koteitan/mvebh.git
