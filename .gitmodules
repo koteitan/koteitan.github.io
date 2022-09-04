@@ -110,3 +110,9 @@
 [submodule "mvebh"]
 	path = mvebh
 	url = git@github.com:koteitan/mvebh.git
+[submodule "basmac2"]
+	path = basmac2
+	url = git@github.com:koteitan/basmac2.git
+[submodule "fractalblockmaze"]
+	path = fractalblockmaze
+	url = git@github.com:koteitan/fractalblockmaze.git
