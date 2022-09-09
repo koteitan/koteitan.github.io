@@ -116,3 +116,6 @@
 [submodule "fractalblockmaze"]
 	path = fractalblockmaze
 	url = git@github.com:koteitan/fractalblockmaze.git
+[submodule "staged/fractalblockmaze"]
+	path = staged/fractalblockmaze
+	url = git@github.com:koteitan/fractalblockmaze.git
