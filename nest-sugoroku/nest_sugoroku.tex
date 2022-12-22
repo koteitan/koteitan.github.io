@@ -1,0 +1,158 @@
+\documentclass[a4j, 12pt]{jsarticle}
+\usepackage{amsmath,amssymb,bm,ascmac}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{% hyperref
+setpagesize=false,
+ bookmarksnumbered=true,%
+ bookmarksopen=true,%
+ colorlinks=true,%
+ linkcolor=blue,
+ citecolor=red,
+}
+\usepackage[top=10truemm,bottom=20truemm,left=8truemm,right=8truemm]{geometry}
+\usepackage{comment}
+\author{koteitan}
+\renewcommand{\liminf}{\lim_{n\rightarrow\infty}}
+\newcommand{\nat}{\mathbb{N}}
+\title{ネストすごろく}
+
+\begin{document}
+\maketitle
+
+\section{問題}
+\begin{shadebox}
+[問] 下記のネストすごろくをクリアできる確率はいくらでしょうか？
+
+\par
+
+ネストすごろく:ゲームが始まると,主人公は下記の START のマスにいる状態になります. $1$～$6$ の目があるフェアなサイコロを振り, 出た目の数だけ右に進みます. GOAL に達するとクリアです(GOAL を超えて進む目が出たとしてもクリアです)．nest のマスに停まると,ミニゲーム「ネストすごろく」がはじまり,それをクリアすると,つづきができます\cite{nestsugoroku}.
+
+~
+  \begin{equation*}
+    \textrm{[START] [nest] [nest] [nest] [nest] [nest] [GOAL]}
+  \end{equation*}
+
+\end{shadebox} 
+
+~
+
+\section{解法}
+一旦ミニゲームがどんな内容なのかを忘れて，ミニゲームをクリアできる確率を $x$ とおいちゃいます.
+nest マスに右から$1, 2, 3, 4, 5$, START マスに $6$ と名前を付けます.
+マス $k$ にいるときに,クリアできる確率を $P_k(x)$ とします.
+\begin{table}[h]
+  \centering
+  \begin{tabular}{ccccccc}
+    6 & 5&4&3&2&1&~\\
+    ［START］ & [nest]&[nest]&[nest]&[nest]&[nest]&[GOAL]
+\end{tabular}
+\end{table}
+
+\begin{eqnarray}
+  P_1(x)&=&1\\
+  P_2(x)&=&(\textrm{2～6が出る確率})+(\textrm{1がでちゃう確率})\cdot(\textrm{ミニゲームがクリアできる確率}=x)\cdot(\textrm{残りが解ける確率})\nonumber\\
+      &=& \frac{5}{6} + \frac{1}{6}\cdot x \cdot P_1(x)\\
+  P_3(x)&=& (\text{同じ感じで})\\
+        &=& \frac{4}{6} + \frac{1}{6}xP_1(x) + \frac{1}{6}xP_2(x)\\
+  P_4(x)&=& \frac{3}{6} + \frac{1}{6}xP_1(x) + \frac{1}{6}xP_2(x) + \frac{1}{6}xP_3(x)\\
+  P_5(x)&=& \frac{2}{6} + \frac{1}{6}xP_1(x) + \frac{1}{6}xP_2(x) + \frac{1}{6}xP_3(x) + \frac{1}{6}xP_4(x)\\
+  P_6(x)&=& \frac{1}{6} + \frac{1}{6}xP_1(x) + \frac{1}{6}xP_2(x) + \frac{1}{6}xP_3(x) + \frac{1}{6}xP_4(x) + \frac{1}{6}xP_5(x)
+\end{eqnarray}
+
+計算しますと
+\begin{eqnarray}
+  P_1(x)&=& 1\\
+  P_2(x)&=& \frac{5}{6} +\frac{ 1}{ 6}x\\
+  P_3(x)&=& \frac{2}{3} +\frac{11}{36}x + \frac{ 1}{ 36}x^2\\
+  P_4(x)&=& \frac{1}{2} +\frac{ 5}{12}x + \frac{16}{216}x^2 + \frac{ 1}{ 216} x^3\\
+  P_5(x)&=& \frac{1}{3} +\frac{ 1}{ 2}x + \frac{ 4}{ 27}x^2 + \frac{23}{1296} x^3 + \frac{ 1}{1296} x^4\\
+  P_6(x)&=& \frac{1}{6} +\frac{ 5}{ 9}x + \frac{25}{108}x^2 + \frac{55}{1296} x^3 + \frac{29}{7776} x^4 + \frac{1}{7776} x^5
+\end{eqnarray}
+
+ここで多項式 $g(x)$ を
+\begin{equation}
+  g(x) = \frac{1}{6} + \frac{5}{9} x+ \frac{25}{108} x^2 + \frac{55}{1296} x^3 + \frac{29}{7776} x^4 + \frac{1}{7776} x^5
+\end{equation}
+とおきます.
+
+数列 $a_n$ を，最初の階層を1階層目として, $n+1$ 階層目に入るとゲームオーバーというルールを課した場合の階層限定付きネストすごろくがクリアできる確率とすると，
+\begin{eqnarray}
+  a_1 &=& \frac{1}{6}\\
+  a_{n+1} &=& P_6(x) = g(a_n)
+\end{eqnarray}
+が言えます.
+
+ちなみに，数列 $a_n$ は，
+$a_2 = \frac{1}{6}$ かつ $\frac{5}{9}x$, $\frac{25}{108}x^2$, $\frac{55}{1296}x^3$, $\frac{29}{7776}x^4$, $\frac{1}{7776}x^5$ の全てが $x>0$ にて狭義単調増加なので,
+\begin{equation*}
+  a_n \textrm{は単調増加数列} \cdots \textrm{[eq.1]}
+\end{equation*}
+です．
+
+ここで $x$ の方程式 $x = g(x)$ の 2 つの解のうち,小さい方を $z$ とします.
+
+WolframAlpha さん\cite{wolframalpha}によると 
+\begin{equation}
+  z \approx 0.54768\cdots.
+\end{equation}
+らしいので，$a_1 = \frac{1}{6} < 0.5 < z$ より,
+\begin{equation*}
+  a_1 < z \cdots \textrm{[eq.2.1]}
+\end{equation*}
+
+$a_n < z$ と仮定すると, $a_{n+1} = g(a_n) < g(z) = z$. よって,
+\begin{equation*}
+  a_n < z \textrm{ならば} a_{n+1} < z \cdots \textrm{[eq.2.2]}
+\end{equation*}
+
+[eq.2.1], [eq.2.2] より数学的帰納法によりすべての自然数 $n$ について
+\begin{equation*}
+  a_n < z. \cdots \textrm{[eq.2]}
+\end{equation*}
+
+$a_n$ は単調増加 [eq.1] かつ上に有界 [eq.2] なので, $a_n$ は収束値を持ちます.
+
+収束値を $\liminf a_n=x$ とすると
+\begin{equation}
+  x = \liminf a_n = \liminf a_{n+1} = \liminf g(a_n).
+\end{equation}
+
+$g(x)$ は連続関数より,
+\begin{equation}
+  x = \liminf g(a_n) =  g(\liminf a_n) = g(x).
+\end{equation}
+よって $x = g(x)$.
+
+この方程式の解は, $x = z, 1$であり，[eq.2] より $x \leq z$. よって $x\neq 1$.  
+よって
+\begin{eqnarray}
+  x&=&z\\
+  &\approx& 0.54768\cdots.
+\end{eqnarray}
+
+\section{余談}
+ゆる言語学ラジオサポーターコミュニティの Miu さんによると，$g(x)$ は下記のように書けるそうです．
+
+\begin{eqnarray}
+g(x)&=&\frac{1}{6}+\frac{1}{6}\sum_{k=1}^5(k+1)\frac{(6+x)^{k-1}}{6^k}\\
+    &=&\frac{1}{x}\left((x-1)\left(1+\frac{x}{6}\right)^5+1\right)
+\end{eqnarray}
+
+きれいですね，これ．
+
+さらにサイコロの目の数を $d$，ゴールまでの間にある nest マスの数を $k$ としたときのクリア出来る確率 $P_{k,d}(x)$ について，
+\begin{eqnarray}
+  P_{k,d}(x)&=&\frac{1}{x}\left((x-1)\left(1+\frac{x}{d}\right)^k+1\right)
+\end{eqnarray}
+も成り立ちそうです．
+
+\section*{Special thanks}
+rpakrさん
+
+\begin{thebibliography}{99}
+\bibitem{nestsugoroku} koteitan, "ネストすごろく", twitter, 2022.12.19 \url{https://twitter.com/koteitan/status/1604851675604209664}
+\bibitem{wolframalpha} WolframAlpha, \url{https://www.wolframalpha.com/input?i=1%2F6+%2B+5%2F9+x+%2B+25%2F108+x%5E2+%2B+55%2F1296+x%5E3+%2B+29%2F7776+x%5E4+%2B+1%2F7776+x%5E5+%3D+x}
+\end{thebibliography}
+
+\end{document}
