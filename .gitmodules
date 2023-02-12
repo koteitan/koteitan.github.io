@@ -119,3 +119,6 @@
 [submodule "staged/fractalblockmaze"]
 	path = staged/fractalblockmaze
 	url = git@github.com:koteitan/fractalblockmaze.git
+[submodule "nostrpostexist"]
+	path = nostrpostexist
+	url = git@github.com:koteitan/nostrpostexist.git
