@@ -122,3 +122,6 @@
 [submodule "nostrpostexist"]
 	path = nostrpostexist
 	url = git@github.com:koteitan/nostrpostexist.git
+[submodule "staged/nostrpostexist"]
+	path = staged/nostrpostexist
+	url = git@github.com:koteitan/nostrpostexist.git
