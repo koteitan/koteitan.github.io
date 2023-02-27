@@ -120,8 +120,8 @@
 	path = staged/fractalblockmaze
 	url = git@github.com:koteitan/fractalblockmaze.git
 [submodule "nostrpostexist"]
-	path = nostrpostexist
+	path = nostr-post-checker
 	url = git@github.com:koteitan/nostrpostexist.git
 [submodule "staged/nostrpostexist"]
-	path = staged/nostrpostexist
-	url = git@github.com:koteitan/nostrpostexist.git
+	path = staged/nostr-post-cheker
+	url = git@github.com:koteitan/nostr-post-checker.git
