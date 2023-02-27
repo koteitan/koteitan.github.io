@@ -123,5 +123,5 @@
 	path = nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
 [submodule "staged/nostr-post-checker"]
-	path = staged/nostr-post-cheker
+	path = staged/nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
