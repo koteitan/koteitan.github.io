@@ -125,3 +125,9 @@
 [submodule "staged/nostr-post-checker"]
 	path = staged/nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
+[submodule "staged/nostr-tsne"]
+	path = nostr-tsne
+	url = git@github.com:koteitan/nostr-tsne.git
+[submodule "nostr-tsne"]
+	path = nostr-tsne
+	url = git@github.com:koteitan/nostr-tsne.git
