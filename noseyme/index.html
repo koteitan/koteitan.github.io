@@ -5,7 +5,7 @@
 <script>
 var search = function(){
 	var q;
-  if(pubkey!=""){
+  if(form0.pubkey.value!=""){
     q = encodeURIComponent(form0.word.value)+"+from:"+form0.pubkey.value;
   }else{
     q = encodeURIComponent(form0.word.value);
@@ -17,14 +17,10 @@ var search = function(){
 </head><body>
 <h1>nosey me</h1>
 <form id="form0" method="get" onsubmit="search();return false;" action="https://nosey.vercel.app/">
-<input type="hidden" name="param" value="desc">
-<table><tr>
-  <td><input type="submit" value="search"></td>
-  <td><input type="text" name="word"   id="word"   value="" size="30"></td>
-  </tr><tr>
-  <td>from:</td>
-  <td><input type="text" name="pubkey" id="pubkey" value="" size="30"></td>
-</tr></table>
+<input type="submit" value="search"><br>
+<input type="text" name="word"   id="word"   value="" size="30"><br>
+from:<br>
+<input type="text" name="pubkey" id="pubkey" value="" size="30"><br>
 </form>
 <script>
 window.onload=function(){
@@ -36,7 +32,7 @@ window.onload=function(){
 }
 //</script>
 <address>
-  <a href="./">nosey me</a> version 0.1<br>
+  <a href="./">nosey me</a> version 0.2<br>
   is programmed by <a href="https://nostter.vercel.app/koteitan.github.io">koteitan</a><br>
   <a href="https://nosey.vercel.app">nosey</a> is by <a href="https://github.com/akiomik">akiomik</a><br>
   Source code is on <a href="https://github.com/koteitan/koteitan.github.io/noseyme">github</a><br>
