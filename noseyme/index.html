@@ -1,0 +1,45 @@
+<html><head><title>nosey me</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon.jpg">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+var search = function(){
+	var q;
+  if(pubkey!=""){
+    q = encodeURIComponent(form0.word.value)+"+from:"+form0.pubkey.value;
+  }else{
+    q = encodeURIComponent(form0.word.value);
+  }
+  localStorage.setItem("pubkey",form0.pubkey.value);
+	location.href = "https://nosey.vercel.app/?q=" + q;
+}
+//</script>
+</head><body>
+<h1>nosey me</h1>
+<form id="form0" method="get" onsubmit="search();return false;" action="https://nosey.vercel.app/">
+<input type="hidden" name="param" value="desc">
+<table><tr>
+  <td><input type="submit" value="search"></td>
+  <td><input type="text" name="word"   id="word"   value="" size="30"></td>
+  </tr><tr>
+  <td>from:</td>
+  <td><input type="text" name="pubkey" id="pubkey" value="" size="30"></td>
+</tr></table>
+</form>
+<script>
+window.onload=function(){
+  var p = localStorage.getItem("pubkey");
+  if(p!==null){
+    form0.pubkey.value = p;
+  }
+  document.getElementById("word").focus();
+}
+//</script>
+<address>
+  <a href="./">nosey me</a> version 0.1<br>
+  is programmed by <a href="https://nostter.vercel.app/koteitan.github.io">koteitan</a><br>
+  <a href="https://nosey.vercel.app">nosey</a> is by <a href="https://github.com/akiomik">akiomik</a><br>
+  Source code is on <a href="https://github.com/koteitan/koteitan.github.io/noseyme">github</a><br>
+</address>
+</body></html>
+
