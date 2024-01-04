@@ -131,3 +131,9 @@
 [submodule "nostr-tsne"]
 	path = nostr-tsne
 	url = git@github.com:koteitan/nostr-tsne.git
+[submodule "ndsuika"]
+	path = ndsuika
+	url = git@github.com:koteitan/ndsuika.git
+[submodule "nosey"]
+	path = nosey
+	url = git@github.com:koteitan/nosey.git
