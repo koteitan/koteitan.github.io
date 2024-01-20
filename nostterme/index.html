@@ -1,41 +1,23 @@
 <html><head><title>nostter me</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon.jpg">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 var search = function(){
 	var q;
-  if(form0.pubkey.value!=""){
-    q = encodeURIComponent(form0.word.value)+"+from:"+form0.pubkey.value;
-  }else{
-    q = encodeURIComponent(form0.word.value);
-  }
-  localStorage.setItem("pubkey",form0.pubkey.value);
-	location.href = "https://nosey.vercel.app/?q=" + q;
+  q = encodeURIComponent(form0.word.value);
+	location.href = "https://nostter.app/?mine=ok&q=" + q;
 }
-//</script>
+</script>
 </head><body>
-<h1>nosey me</h1>
-<form id="form0" method="get" onsubmit="search();return false;" action="https://nosey.vercel.app/">
+<h1>nostter me</h1>
+<form id="form0" method="get" onsubmit="search();">
 <input type="submit" value="search"><br>
 <input type="text" name="word"   id="word"   value="" size="30"><br>
-from:<br>
-<input type="text" name="pubkey" id="pubkey" value="" size="30"><br>
 </form>
-<script>
-window.onload=function(){
-  var p = localStorage.getItem("pubkey");
-  if(p!==null){
-    form0.pubkey.value = p;
-  }
-  document.getElementById("word").focus();
-}
-//</script>
 <address>
-  <a href="./">nosey me</a> version 0.2<br>
-  is programmed by <a href="https://nostter.vercel.app/koteitan.github.io">koteitan</a><br>
-  <a href="https://nosey.vercel.app">nosey</a> is by <a href="https://github.com/akiomik">akiomik</a><br>
-  Source code is on <a href="https://github.com/koteitan/koteitan.github.io/noseyme">github</a><br>
+  <a href="./">nostter me</a> version 1.0<br>
+  is programmed by <a href="https://nostter.app/koteitan.github.io">koteitan</a><br>
+  <a href="https://nostter.app">nostter</a> is by <a href="https://github.com/SnowCait">SnowCait</a><br>
+  Source code is on <a href="https://github.com/koteitan/koteitan.github.io/nostterme">github</a><br>
 </address>
 </body></html>
 
