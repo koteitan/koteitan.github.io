@@ -137,3 +137,6 @@
 [submodule "nosey"]
 	path = nosey
 	url = git@github.com:koteitan/nosey.git
+[submodule "4d-pong-wars"]
+	path = 4d-pong-wars
+	url = git@github.com:koteitan/4d-pong-wars.git
