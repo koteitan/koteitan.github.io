@@ -140,3 +140,6 @@
 [submodule "4d-pong-wars"]
 	path = 4d-pong-wars
 	url = git@github.com:koteitan/4d-pong-wars.git
+[submodule "old/nostr-post-checker"]
+	path = old/nostr-post-checker
+	url = git@github.com:koteitan/nostr-post-checker.git
