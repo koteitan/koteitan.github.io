@@ -143,3 +143,6 @@
 [submodule "old/nostr-post-checker"]
 	path = old/nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
+[submodule "findmine"]
+	path = findmine
+	url = git@github.com:koteitan/findmine.git
