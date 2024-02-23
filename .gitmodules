@@ -149,3 +149,6 @@
 [submodule "nostr-hex"]
 	path = nostr-hex
 	url = git@github.com:koteitan/nostr-hex.git
+[submodule "hilight"]
+	path = hilight
+	url = git@github.com:koteitan/hilight-embed.git
