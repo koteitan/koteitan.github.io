@@ -34,13 +34,21 @@
     Test of syntax hilights for HTML embedding by hilight.js and Prism.
     <hr><!-- =============================================================== -->
     <h2>input</h2>
-    <p>Library: <select id="library-selector">
-        <option value="highlight" selected>Highlight.js</option>
-        <option value="prism">Prism.js</option>
-    </select></p>
-    <p>Language: <select id="language-selector"></select></p>
+    <table>
+      <tr>
+        <td>Library: </td>
+        <td>
+          <select id="library-selector">
+            <option value="highlight" selected>Highlight.js</option>
+            <option value="prism">Prism.js</option>
+          </select>
+        </td>
+      </tr>
+      <tr><td>Language: </td><td><select id="language-selector"></select></td></tr>
+      <tr><td>Theme: </td><td><select id="theme-selector"></select></td></tr>
+    </table>
     <p>Code: <br>
-    <textarea id="code-input" rows="15" cols="100" placeholder="Type your code here...">
+<textarea id="code-input" rows="15" cols="100" placeholder="Type your code here...">
 function updateThemeOptions(selectedLibrary) {
     const themeSelector = document.getElementById('theme-selector');
     themeSelector.innerHTML = ''; // clear previous options
@@ -52,7 +60,6 @@ function updateThemeOptions(selectedLibrary) {
     });
 }
 </textarea></p>
-<p>Theme: <select id="theme-selector"></select></p>
     <hr><!-- =============================================================== -->
     <h2>Preview</h2>
     <pre><code id="code-output"></code></pre>
