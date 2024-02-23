@@ -146,3 +146,6 @@
 [submodule "findmine"]
 	path = findmine
 	url = git@github.com:koteitan/findmine.git
+[submodule "nostr-hex"]
+	path = nostr-hex
+	url = git@github.com:koteitan/nostr-hex.git
