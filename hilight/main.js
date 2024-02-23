@@ -483,6 +483,7 @@ const langList = {
     "haskell",
     "haxe",
     "hsp",
+    "html(xml)",
     "http",
     "hy",
     "inform7",
@@ -707,9 +708,12 @@ function updateThemeOptions(selectedLibrary) {
 function updatePreview() {
     const input = document.getElementById('code-input').value;
     const library = document.getElementById('library-selector').value;
-    const language = document.getElementById('language-selector').value;
+    var language = document.getElementById('language-selector').value;
     const themeFilename = document.getElementById('theme-selector').value;
     const output = document.getElementById('code-output');
+    if(language.search(/\(/)!=-1){
+      language = language.replace(/(^[\w-_]+\(|\)$)/g,"");
+    }
 
     // 過去のlinkタグをすべて消去し、新しいテーマを適用
     const existingLink = document.getElementById('theme-link');
@@ -728,43 +732,72 @@ function updatePreview() {
     output.className = '';
     if (library === 'prism') {
         output.classList.add('language-' + language);
+        Prism.highlightAll();
     } else {
         output.classList.add('language-' + language);
+        output.removeAttribute("data-highlighted");
+        hljs.highlightAll();
     }
     output.textContent = input;
 
     // ハイライトを適用
     if (library === 'prism') {
-        Prism.highlightAll();
     } else {
-        hljs.highlightAll();
     }
 }
 function updateEmbed() {
     const input = document.getElementById('code-input').value;
     const library = document.getElementById('library-selector').value;
-    const language = document.getElementById('language-selector').value;
+    var language = document.getElementById('language-selector').value;
     const themeFilename = document.getElementById('theme-selector').value;
     const embedhead = document.getElementById('embed-head');
     const embedbody = document.getElementById('embed-body');
+    if(language.search(/\(/)!=-1){
+      language = language.replace(/(^[\w-_]+\(|\)$)/g,"");
+    }
+
     embedhead.className = '';
     embedbody.className = '';
     if (library === 'prism') {
         embedhead.classList.add('language-html');
         embedbody.classList.add('language-html');
+        embedhead.textContent = 
+          "<html>\n"+
+          "<head>\n"+
+          "\n"+
+          "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/prismjs/themes/"+themeFilename+"\">\n"+
+          "\n"+
+          "</head>";
+        embedbody.textContent = 
+          "<body>\n"+
+          "\n"+
+          "<script src=\"https://cdn.jsdelivr.net/npm/prismjs/prism.js\"></script>\n\n"+
+          "<pre><code class=\"language-"+language+"\">"+input+"</code></pre>\n"+
+          "\n"+
+          "</body>\n"
+          "<html>";
+        Prism.highlightAll();
     } else {
         embedhead.classList.add('xml');
         embedbody.classList.add('xml');
-    }
-
-    // ハイライトを適用
-    if (library === 'prism') {
-        embedhead.textContent = "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/prismjs/themes/"+themeFilename+"\">";
-        embedbody.textContent = "<code class=\"language-"+language+"\">\n"+input+"</code>";
-        Prism.highlightAll();
-    } else {
-        embedhead.textContent = "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/"+themeFilename+"\">";
-        embedbody.textContent = "<script src=\"https://cdn.jsdelivr.net/npm/prismjs/prism.js\"></script>\n<code class=\"language-"+language+"\">\n"+input+"</code>";
+        embedhead.textContent = 
+          "<html>\n"+
+          "<head>\n"+
+          "\n"+
+          "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/"+themeFilename+"\">\n"+
+          "\n"+
+          "</head>";
+        embedbody.textContent = 
+          "<body>\n"+
+          "\n"+
+          "<script src=\"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js\"></script>\n\n"+
+          "<pre><code class=\"language-"+language+"\">"+input+"</code></pre>\n\n"+
+          "<script>hljs.highlightAll();</script>\n"+
+          "\n"+
+          "</body>\n"+
+          "</html>";
+        embedhead.removeAttribute("data-highlighted");
+        embedbody.removeAttribute("data-highlighted");
         hljs.highlightAll();
     }
 }

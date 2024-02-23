@@ -5,6 +5,13 @@
     <title>hilight-tester</title>
     <link id="theme-link" rel="stylesheet">
 <style>
+    h1 {
+      margin-bottom:0;
+    }
+    hr {
+      margin-top:0;
+      margin-bottom:0;
+    }
     body, a:link, a:visited {
         background-color: #2d2d2d; /* ダークグレーの背景色 */
         color: #ffffff; /* 白色のテキスト */
@@ -15,7 +22,7 @@
         color: #ffffff; /* 白色のテキスト */
     }
     textarea, select, button {
-        background-color: #555; /* 入力フィールド等の背景色 */
+        background-color: #001; /* 入力フィールド等の背景色 */
         color: #fff; /* 入力フィールド等のテキスト色 */
         border: 1px solid #777; /* 境界線の色 */
     }
@@ -27,20 +34,24 @@
         width: 100%; /* セレクトボックスの横幅をページの幅に合わせて調整 */
         max-width: 300px; /* 最大幅を設定して、過度に広がりすぎないようにする */
     }
+    address {
+        text-align: right;
+        font-style: normal;
+    }
 </style>
 </head>
 <body>
-    <h1>hilight-tester</h1>
-    Test of syntax hilights for HTML embedding by hilight.js and Prism.
-    <hr><!-- =============================================================== -->
+    <h1>hilighted embed maker</h1>
+    <hr>
+    Site making HTML embedding with syntax hilights by hilight.js and Prism.
     <h2>input</h2>
     <table>
       <tr>
         <td>Library: </td>
         <td>
           <select id="library-selector">
-            <option value="highlight" selected>Highlight.js</option>
-            <option value="prism">Prism.js</option>
+            <option value="highlight" selected>highlight.js</option>
+            <option value="prism">Prism</option>
           </select>
         </td>
       </tr>
@@ -48,8 +59,7 @@
       <tr><td>Theme: </td><td><select id="theme-selector"></select></td></tr>
     </table>
     <p>Code: <br>
-<textarea id="code-input" rows="15" cols="100" placeholder="Type your code here...">
-function updateThemeOptions(selectedLibrary) {
+<textarea id="code-input" rows="15" cols="100" placeholder="Type your code here...">function updateThemeOptions(selectedLibrary) {
     const themeSelector = document.getElementById('theme-selector');
     themeSelector.innerHTML = ''; // clear previous options
     themes[selectedLibrary].forEach(themeFilename => {
@@ -58,27 +68,26 @@ function updateThemeOptions(selectedLibrary) {
         option.textContent = themeFilename.split('.').shift();
         themeSelector.appendChild(option);
     });
-}
-</textarea></p>
-    <hr><!-- =============================================================== -->
+}</textarea></p>
+    <hr>
     <h2>Preview</h2>
     <pre><code id="code-output"></code></pre>
-    <hr><!-- =============================================================== -->
+    <hr>
     <h2>Embed code</h2>
-    in &lt;head&gt;
     <pre><code id="embed-head" class="xml"></code></pre>
-    in &lt;body&gt;
     <pre><code id="embed-body" class="xml"></code></pre>
 
     <script src="main.js"></script>
     <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <footer>
-      <ul>
-        <li>hilight.js: <a href="https://highlightjs.org/">https://highlightjs.org/</a></li>
-        <li>Prism: <a href="https://prismjs.com/">https://prismjs.com/</a></li>
-      </ul>
-    </footer>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <address>
+      hilight-embed v1.0<br>
+      Programmed by <a href="https://twitter.com/koteitan">koteitan</a><br>
+      Source code is on <a href="https://github.com/koteitan/hilight-embed">github</a><br>
+      The site is licensed by <a href="https://github.com/koteitan/hilight-embed/blob/master/LICENSE.md">MIT License</a><br>
+      hilight.js is by <a href="https://highlightjs.org/">https://highlightjs.org/</a><br>
+      Prism is by <a href="https://prismjs.com/">https://prismjs.com/</a><br>
+    </address>
 </body>
 </html>
