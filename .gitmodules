@@ -152,3 +152,6 @@
 [submodule "hilight"]
 	path = hilight
 	url = git@github.com:koteitan/hilight-embed.git
+[submodule "countdown"]
+	path = countdown
+	url = git@github.com:koteitan/countdown.git
