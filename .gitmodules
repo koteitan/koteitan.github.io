@@ -117,13 +117,13 @@
 	path = fractalblockmaze
 	url = git@github.com:koteitan/fractalblockmaze.git
 [submodule "staged/fractalblockmaze"]
-	path = staged/fractalblockmaze
+	path = beta/fractalblockmaze
 	url = git@github.com:koteitan/fractalblockmaze.git
 [submodule "nostr-post-checker"]
 	path = nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
 [submodule "staged/nostr-post-checker"]
-	path = staged/nostr-post-checker
+	path = beta/nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
 [submodule "staged/nostr-tsne"]
 	path = nostr-tsne
@@ -154,4 +154,7 @@
 	url = git@github.com:koteitan/hilight-embed.git
 [submodule "countdown"]
 	path = countdown
+	url = git@github.com:koteitan/countdown.git
+[submodule "beta/countdown"]
+	path = beta/countdown
 	url = git@github.com:koteitan/countdown.git
