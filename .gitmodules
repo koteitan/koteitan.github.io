@@ -161,3 +161,6 @@
 [submodule "polyrhythm"]
 	path = polyrhythm
 	url = git@github.com:koteitan/polyrhythm.git
+[submodule "hello-rx-nostr"]
+	path = hello-rx-nostr
+	url = git@github.com:koteitan/hello-rx-nostr.git
