@@ -164,3 +164,6 @@
 [submodule "hello-rx-nostr"]
 	path = hello-rx-nostr
 	url = git@github.com:koteitan/hello-rx-nostr.git
+[submodule "beta/nostr-tsne"]
+	path = beta/nostr-tsne
+	url = git@github.com:koteitan/nostr-tsne.git
