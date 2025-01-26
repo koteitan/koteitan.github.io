@@ -167,3 +167,6 @@
 [submodule "beta/nostr-tsne"]
 	path = beta/nostr-tsne
 	url = git@github.com:koteitan/nostr-tsne.git
+[submodule "pentamaze"]
+	path = pentamaze
+	url = git@github.com:koteitan/pentation-maze.git
