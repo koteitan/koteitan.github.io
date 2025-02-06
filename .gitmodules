@@ -170,3 +170,6 @@
 [submodule "pentamaze"]
 	path = pentamaze
 	url = git@github.com:koteitan/pentation-maze.git
+[submodule "linksim"]
+	path = linksim
+	url = git@github.com:koteitan/linksim.git
