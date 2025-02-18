@@ -173,3 +173,6 @@
 [submodule "linksim"]
 	path = linksim
 	url = git@github.com:koteitan/linksim.git
+[submodule "genregmac"]
+	path = genregmac
+	url = git@github.com:koteitan/genregmac.git
