@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>年度末カウント</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2em;
+    }
+    #percentage {
+      font-size: 2em;
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>現在、年度末までの進捗は…</h1>
+  <div id="percentage">計算中...</div>
+
+  <script>
+    function updateProgress() {
+      const now = new Date();
+      const currentYear = now.getMonth() >= 3 ? now.getFullYear() : now.getFullYear() - 1;
+
+      const start = new Date(`${currentYear}-04-01T00:00:00`);
+      const end = new Date(`${currentYear + 1}-03-31T23:59:59`);
+
+      const total = end - start;
+      const elapsed = now - start;
+      const percentage = (elapsed / total) * 100;
+
+      const display = percentage.toFixed(8) + '%';
+      document.getElementById('percentage').textContent = display;
+    }
+
+    updateProgress();
+    setInterval(updateProgress, 100);
+  </script>
+</body>
+</html>
+
