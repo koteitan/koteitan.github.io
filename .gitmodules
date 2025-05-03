@@ -176,3 +176,9 @@
 [submodule "genregmac"]
 	path = genregmac
 	url = git@github.com:koteitan/genregmac.git
+[submodule "darkmode"]
+	path = darkmode
+	url = git@github.com:koteitan/darkmode.git
+[submodule "beta/darkmode"]
+	path = beta/darkmode
+	url = git@github.com:koteitan/darkmode.git
