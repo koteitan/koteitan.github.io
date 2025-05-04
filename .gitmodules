@@ -182,3 +182,6 @@
 [submodule "beta/darkmode"]
 	path = beta/darkmode
 	url = git@github.com:koteitan/darkmode.git
+[submodule "beam"]
+	path = beam
+	url = git@github.com:koteitan/beam.git
