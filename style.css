@@ -131,15 +131,14 @@ a:hover {
   color: #007bff;
 }
 
-/* data-icon を使ったテキストベースの「アイコン」 */
-.author-info .icon-list li a::before,
-.author-info .icon-list li .nostr-pubkey::before,
-.author-info .icon-list li[data-icon]::before { /* li自体にdata-iconがある場合も対応 */
-  content: attr(data-icon);
-  display: block;
-  font-size: 1.8em;
-  margin-bottom: 8px;
-  color: #007bff;
+/* data-iconを使ったスタイルは削除 */
+
+/* Font Awesome アイコンのスタイル調整 */
+.author-info .icon-list li i {
+  display: block; /* アイコンをブロック要素にしてテキストの上に配置 */
+  font-size: 2em; /* アイコンのサイズ調整 */
+  margin-bottom: 10px; /* テキストとの間隔 */
+  color: #007bff; /* アイコンの色 */
 }
 
 /* Nostrの親li要素のテキストコンテンツ（もしあれば）を非表示にするか、調整する */
