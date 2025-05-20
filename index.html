@@ -3,34 +3,35 @@
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf8">
   <meta http-equiv="Content-Style-Type" content="text/css">
+  <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.ico">
   <title>github koteitan Portfolio</title>
 </head>
 <body>
-<h1><img src='favicon.ico' width="120"> github koteitan Portfolio</h1>
-<h2>Author Info</h2>
-<ul>
-  <li>github: <a href="https://github.com/koteitan/">https://github.com/koteitan/</a></li>
-  <li>author: <ul>
-      <li>twitter: <a href="https://twitter.com/koteitan/">https://twitter.com/koteitan/</a></li>
-      <li>nostr: npub1f3w4x7dqvceeez8kuyq78md3lwhwfm0ra634llr0r3nykwjrs0hqvldhgk<ul>
-          <li><a href="https://nostter.app">nostter(web)</a>: <a href="https://nostter.app/koteitan.github.io">https://nostter.app/koteitan.github.io</a></li>
-          <li><a href="https://apps.apple.com/jp/app/damus/id1628663131">damus(iOS)</a>: <a href="https://damus.io/npub1f3w4x7dqvceeez8kuyq78md3lwhwfm0ra634llr0r3nykwjrs0hqvldhgk">https://damus.io/npub1f3w4x7dqvceeez8kuyq78md3lwhwfm0ra634llr0r3nykwjrs0hqvldhgk</a></li>
-      </ul></li>
-      <li>Bluesky: <a href="https://bsky.app/profile/koteitan.bsky.social">https://bsky.app/profile/koteitan.bsky.social</a></li>
-      <li>fediverse:<ul>
-          <li><a href="https://misskey.io">misskey.io</a>: <a href="https://misskey.io/@koteitan">https://misskey.io/@koteitan</a></li>
-          <li><a href="https://mstdn.jp">mstdn.jp</a>: <a href="https://mstdn.jp/@koteitan">https://mstdn.jp/@koteitan</a></li>
-          <li><a href="https://mathtod.online">mathtod.online</a>: <a href="https://mathtod.online/@koteitan">https://mathtod.online/@koteitan</a></li>
-      </ul></li>
-      <li>Googology Wiki: <a href="https://googology.wikia.org/wiki/User:Koteitan">English</a> | <a href="https://googology.wikia.org/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC:Koteitan">Japanese</a></li>
-    </ul></li>
-</ul>
+<div class="container">
+  <header>
+    <h1><img src='favicon.ico' width="120"> github koteitan Portfolio</h1>
+  </header>
 
-<h2>つくったもの</h2>
-  <li>パズル, プログラミング, その他:
+  <section class="author-info">
+    <h2>Author Info</h2>
+    <ul class="icon-list">
+      <li><a href="https://github.com/koteitan/" title="GitHub: koteitan" data-icon="🐙">GitHub</a></li>
+      <li><a href="https://twitter.com/koteitan/" title="Twitter: @koteitan" data-icon="🐦">Twitter</a></li>
+      <li><a href="https://nostter.app/koteitan.github.io" title="Nostr (web): nostter" data-icon="🌐">Nostr (web)</a></li>
+      <li><a href="https://damus.io/npub1f3w4x7dqvceeez8kuyq78md3lwhwfm0ra634llr0r3nykwjrs0hqvldhgk" title="Nostr (iOS): damus" data-icon="📱">Nostr (iOS)</a></li>
+      <li><a href="https://bsky.app/profile/koteitan.bsky.social" title="Bluesky: koteitan.bsky.social" data-icon="🦋">Bluesky</a></li>
+      <li><a href="https://googology.wikia.org/wiki/User:Koteitan" title="Googology Wiki (English)" data-icon="🇬🇧">Googology Wiki (En)</a></li>
+      <li><a href="https://googology.wikia.org/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC:Koteitan" title="巨大数研究 Wiki (Japanese)" data-icon="🇯🇵">巨大数 Wiki (Ja)</a></li>
+    </ul>
+  </section>
+
+  <section class="projects">
+    <h2>つくったもの</h2>
     <ul>
-      <li><a href="beam/">beam</a> ... 高校の時に作ったビームを出すニム的なボードゲーム</li>
+      <li>パズル, プログラミング, その他:
+        <ul>
+          <li><a href="beam/">beam</a> ... 高校の時に作ったビームを出すニム的なボードゲーム</li>
       <li><a href="darkmode/">darkmode</a> ... 色が変わらないライトモード/ダークモードのデモサイト</li>
       <li><a href="hilight/">hilight embed maker</a> ... ハイライトされたコードブロックの埋め込みを作ります</li>
       <li><a href="https://koteitan.github.io/nest-sugoroku/nest_sugoroku.pdf">nest sugoroku</a> nest マスに停まるとミニゲーム「ネストすごろく」ができる楽しいゲーム、題してネストすごろく</li>
@@ -94,11 +95,12 @@
       </li><!-- shortcuts -->
     </ul><!-- googology -->
   </li><!-- googology -->
-</ul>
-<h2>tweets</h2>
+    </ul>
+  </section>
 
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">[問] 下記のネストすごろくをクリアできる確率はいくらでしょうか？<br><br>ネストすごろく：ゲームが始まると、下記のように START のマスにいる状態になります。サイコロを振り、出た目の数だけ右に進みます。GOAL に達するとクリアです。(GOAL を超えて進む目が出たとしてもクリアです) (つづく) <a href="https://t.co/MRBKwbixNj">pic.twitter.com/MRBKwbixNj</a></p>&mdash; 冬koteitan夏たこみぱん (@koteitan) <a href="https://twitter.com/koteitan/status/1604851675604209664?ref_src=twsrc%5Etfw">December 19, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <section class="tweets-section">
+    <h2>tweets</h2>
+    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">[問] 下記のネストすごろくをクリアできる確率はいくらでしょうか？<br><br>ネストすごろく：ゲームが始まると、下記のように START のマスにいる状態になります。サイコロを振り、出た目の数だけ右に進みます。GOAL に達するとクリアです。(GOAL を超えて進む目が出たとしてもクリアです) (つづく) <a href="https://t.co/MRBKwbixNj">pic.twitter.com/MRBKwbixNj</a></p>&mdash; 冬koteitan夏たこみぱん (@koteitan) <a href="https://twitter.com/koteitan/status/1604851675604209664?ref_src=twsrc%5Etfw">December 19, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">コラッツの問題をパターン繰り返し迷路に変換しました <a href="https://t.co/4uIMb40Xf4">pic.twitter.com/4uIMb40Xf4</a></p>&mdash; 💎こていたん💎 (@koteitan) <a href="https://twitter.com/koteitan/status/1439100327697862657?ref_src=twsrc%5Etfw">September 18, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">100万人とか、すごいたくさんの人が、自分のサイコロが「偶数」の目が１回出るまでずっとサイコロを振り続けました。その全記録を集計したら、人数が多いほど…?</p>&mdash; 💎こていたん💎 (@koteitan) <a href="https://twitter.com/koteitan/status/1433760314437226497?ref_src=twsrc%5Etfw">September 3, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【獺祭】獺祭の価格は磨きオッズに反比例する【数学】 <a href="https://twitter.com/hashtag/%E6%95%B0%E5%AD%A6%E6%97%A5%E6%9C%AC%E9%85%92%E8%AB%96?src=hash&amp;ref_src=twsrc%5Etfw">#数学日本酒論</a> <a href="https://t.co/Mpyei6XcLc">pic.twitter.com/Mpyei6XcLc</a></p>&mdash; 💎こていたん💎 (@koteitan) <a href="https://twitter.com/koteitan/status/807827566966882304?ref_src=twsrc%5Etfw">December 11, 2016</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -131,10 +133,14 @@
 
 
 
+  </section>
+
+  <footer>
     <address>
       github: <a href="https://github.com/koteitan/">https://github.com/koteitan/</a><br>
       author: <a href="https://twitter.com/koteitan/">https://twitter.com/koteitan/</a>
     </address>
-
-    </body>
+  </footer>
+</div>
+</body>
 </html>
