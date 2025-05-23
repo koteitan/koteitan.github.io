@@ -182,3 +182,6 @@
 [submodule "beam"]
 	path = beam
 	url = git@github.com:koteitan/beam.git
+[submodule "harmkey"]
+	path = harmkey
+	url = git@github.com:koteitan/harmkey.git
