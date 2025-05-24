@@ -1,6 +1,3 @@
-[submodule "GoogolMaps2.0"]
-	path = GoogolMaps2.0
-	url = https://github.com/koteitan/GoogolMaps2.0.git
 [submodule "hydraviewer"]
 	path = hydraviewer
 	url = https://github.com/koteitan/hydraviewer.git
@@ -185,3 +182,6 @@
 [submodule "harmkey"]
 	path = harmkey
 	url = git@github.com:koteitan/harmkey.git
+[submodule "keyboard"]
+	path = keyboard
+	url = git@github.com:koteitan/keyboard.git
