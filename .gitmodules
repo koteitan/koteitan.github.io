@@ -25,9 +25,6 @@
 [submodule "vrchecker"]
 	path = vrchecker
 	url = https://github.com/koteitan/vrchecker.git
-[submodule "starlabel"]
-	path = starlabel
-	url = https://github.com/koteitan/starlabel.git
 [submodule "cs4d"]
 	path = cs4d
 	url = https://github.com/koteitan/cs4d.git
@@ -91,10 +88,6 @@
 [submodule "hamkyodai"]
 	path = hamkyodai
 	url = https://github.com/koteitan/Kyodai.git
-[submodule "ordex-staged"]
-	path = ordex-staged
-	url = https://github.com/koteitan/ordex/
-	branch = develop
 [submodule "wy"]
 	path = wy
 	url = https://github.com/koteitan/wy.git
@@ -131,9 +124,6 @@
 [submodule "ndsuika"]
 	path = ndsuika
 	url = git@github.com:koteitan/ndsuika.git
-[submodule "nosey"]
-	path = nosey
-	url = git@github.com:koteitan/nosey.git
 [submodule "4d-pong-wars"]
 	path = 4d-pong-wars
 	url = git@github.com:koteitan/4d-pong-wars.git
@@ -170,9 +160,6 @@
 [submodule "linksim"]
 	path = linksim
 	url = git@github.com:koteitan/linksim.git
-[submodule "genregmac"]
-	path = genregmac
-	url = git@github.com:koteitan/genregmac.git
 [submodule "darkmode"]
 	path = darkmode
 	url = git@github.com:koteitan/darkmode.git
