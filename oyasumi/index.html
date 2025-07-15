@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おやすみ - Good Night Routine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌙 おやすみ</h1>
+            <p class="subtitle">あなたの睡眠習慣をサポート</p>
+        </header>
+
+        <main>
+            <section class="time-section">
+                <h2>現在の時刻</h2>
+                <div id="current-time" class="time-display">--:--:--</div>
+            </section>
+
+            <section class="bedtime-section">
+                <h2>就寝時刻の設定</h2>
+                <input type="time" id="bedtime-input" class="time-input">
+                <button id="set-bedtime" class="btn btn-primary">設定</button>
+                <div id="bedtime-display" class="bedtime-info"></div>
+            </section>
+
+            <section class="routine-section">
+                <h2>就寝前のルーティン</h2>
+                <div id="routine-checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" data-routine="brush-teeth">
+                        <span>歯を磨く</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" data-routine="dim-lights">
+                        <span>照明を暗くする</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" data-routine="no-devices">
+                        <span>デバイスを片付ける</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" data-routine="relax">
+                        <span>リラックスする</span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="sleep-sounds">
+                <h2>睡眠サウンド</h2>
+                <div class="sound-controls">
+                    <select id="sound-select" class="sound-select">
+                        <option value="">サウンドを選択</option>
+                        <option value="rain">雨音</option>
+                        <option value="waves">波の音</option>
+                        <option value="white-noise">ホワイトノイズ</option>
+                    </select>
+                    <button id="play-sound" class="btn btn-secondary">再生</button>
+                    <button id="stop-sound" class="btn btn-secondary" disabled>停止</button>
+                </div>
+                <div id="sound-status" class="sound-status"></div>
+            </section>
+
+            <section class="tips-section">
+                <h2>睡眠のヒント</h2>
+                <div id="sleep-tip" class="tip-box">
+                    <p>ヒントを表示するには下のボタンをクリックしてください</p>
+                </div>
+                <button id="new-tip" class="btn btn-secondary">新しいヒント</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>おやすみなさい 💤</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "oyasumi-good-night",
+  "version": "1.0.0",
+  "description": "A peaceful web application to help users establish healthy bedtime routines",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000 || python -m SimpleHTTPServer 8000",
+    "test": "echo \"No tests configured\""
+  },
+  "keywords": [
+    "sleep",
+    "bedtime",
+    "routine",
+    "wellness",
+    "health"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/oyasumi"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/oyasumi/issues"
+  },
+  "homepage": "https://github.com/yourusername/oyasumi#readme"
+}

@@ -172,3 +172,6 @@
 [submodule "keyboard"]
 	path = keyboard
 	url = git@github.com:koteitan/keyboard.git
+[submodule "googolbook-lm"]
+	path = googolbook-lm
+	url = git@github.com:koteitan/googolbook-lm.git
