@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐻‍❄️ 北極海航路 港町めぐりの旅 🚢</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif;
+            background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '❄️';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            left: -20px;
+            top: -20px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .header::after {
+            content: '🌊';
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.1;
+            right: -10px;
+            bottom: -10px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section-divider {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 1.4em;
+            color: #7e57c2;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #7e57c2, transparent);
+        }
+        
+        .section-divider::before {
+            left: 0;
+        }
+        
+        .section-divider::after {
+            right: 0;
+        }
+        
+        .port-card {
+            background: linear-gradient(135deg, #fff 0%, #f3e5f5 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .port-description {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dotted #e0e0e0;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+        
+        .port-description p {
+            margin-bottom: 10px;
+        }
+        
+        .wiki-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            padding: 5px 12px;
+            background: #5e35b1;
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+        
+        .wiki-link:hover {
+            background: #7e57c2;
+        }
+        
+        .port-highlight {
+            color: #7e57c2;
+            font-weight: bold;
+        }
+        
+        .port-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #7e57c2;
+        }
+        
+        .port-card.major {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            border: 2px solid #f06292;
+        }
+        
+        .port-card.minor {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #81c784;
+        }
+        
+        .port-card.supply {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ffb74d;
+        }
+        
+        .port-number {
+            position: absolute;
+            top: -12px;
+            left: 25px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(250,112,154,0.4);
+        }
+        
+        .port-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .port-flag {
+            font-size: 2em;
+        }
+        
+        .port-info {
+            flex: 1;
+        }
+        
+        .port-name {
+            font-size: 1.3em;
+            color: #5e35b1;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .port-country {
+            color: #7e57c2;
+            font-size: 0.9em;
+        }
+        
+        .port-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #424242;
+            font-size: 0.9em;
+        }
+        
+        .detail-icon {
+            font-size: 1.2em;
+        }
+        
+        .port-features {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .feature-badge {
+            background: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #7e57c2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tips-section {
+            background: #fff3e0;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 3px dashed #ffb74d;
+        }
+        
+        .tips-title {
+            color: #f57c00;
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .tip-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.2s ease;
+        }
+        
+        .tip-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .tip-icon {
+            font-size: 2em;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .summary h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.3);
+            padding: 15px;
+            border-radius: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        
+        .wildlife {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            font-size: 3em;
+        }
+        
+        .wildlife span {
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .wildlife span:nth-child(2) { animation-delay: 0.2s; }
+        .wildlife span:nth-child(3) { animation-delay: 0.4s; }
+        .wildlife span:nth-child(4) { animation-delay: 0.6s; }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .footer {
+            background: #e8eaf6;
+            padding: 30px;
+            text-align: center;
+            color: #5e35b1;
+        }
+        
+        .warning {
+            background: #ffebee;
+            border-left: 5px solid #ef5350;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: #c62828;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            border: 2px solid;
+        }
+        
+        .legend-color.major {
+            background: #fce4ec;
+            border-color: #f06292;
+        }
+        
+        .legend-color.minor {
+            background: #e8f5e9;
+            border-color: #81c784;
+        }
+        
+        .legend-color.supply {
+            background: #fff3e0;
+            border-color: #ffb74d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐻‍❄️ 北極海航路 港町めぐりの旅 🚢</h1>
+            <p class="subtitle">〜 18の港と集落を巡る氷の海の大冒険 〜</p>
+        </div>
+        
+        <div class="content">
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color major"></div>
+                    <span>主要港</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color minor"></div>
+                    <span>小規模港/集落</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color supply"></div>
+                    <span>補給拠点</span>
+                </div>
+            </div>
+            
+            <div class="section-divider">🚢 ヨーロッパ出発 🚢</div>
+            
+            <div class="port-card major">
+                <div class="port-number">1</div>
+                <div class="port-header">
+                    <span class="port-flag">🇩🇪</span>
+                    <div class="port-info">
+                        <div class="port-name">ハンブルク</div>
+                        <div class="port-country">ドイツ</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 190万人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">⚓</span>
+                        <span>ヨーロッパ第2の港</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">コンテナターミナル</span>
+                    <span class="feature-badge">造船所</span>
+                    <span class="feature-badge">24時間稼働</span>
+                </div>
+                <div class="port-description">
+                    <p>ハンブルク港は、<span class="port-highlight">「ドイツの世界への門」</span>と呼ばれる、ヨーロッパで2番目に大きなコンテナ港です。エルベ川の河口から約100km内陸に位置しながら、大型船舶が入港可能な深水港として機能しています。13世紀から続く港湾都市の歴史を持ち、ハンザ同盟の中心地として栄えました。</p>
+                    <p>現在は年間約1億3000万トンの貨物を取り扱い、300以上の港と定期航路で結ばれています。特に中国との貿易が盛んで、<span class="port-highlight">「ヨーロッパの中国への玄関口」</span>としての役割も担っています。港湾地区は約74平方キロメートルに及び、4つのコンテナターミナルでは年間900万TEU以上のコンテナを処理しています。</p>
+                    <p>また、ハンブルク港は最新技術の導入にも積極的で、スマートポート構想を推進。IoTセンサーやAIを活用した効率的な港湾運営を実現しています。造船業も盛んで、豪華客船から潜水艦まで幅広い船舶を建造。北極海航路への出発点として、<span class="port-highlight">耐氷船の整備施設</span>も充実しており、極地航行に必要な特殊装備の取り付けや、経験豊富な極地航海士の手配も可能です。港周辺には海事博物館や歴史的な倉庫街「シュパイヒャーシュタット」（世界遺産）もあり、出航前の観光も楽しめます。</p>
+                    <a href="https://ja.wikipedia.org/wiki/ハンブルク港" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="port-card supply">
+                <div class="port-number">2</div>
+                <div class="port-header">
+                    <span class="port-flag">🇳🇴</span>
+                    <div class="port-info">
+                        <div class="port-name">トロムソ</div>
+                        <div class="port-country">ノルウェー</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 7.7万人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🌌</span>
+                        <span>北極圏最大の都市</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">オーロラ観測地</span>
+                    <span class="feature-badge">補給基地</span>
+                    <span class="feature-badge">砕氷船母港</span>
+                </div>
+                <div class="port-description">
+                    <p>トロムソは北緯69度に位置し、<span class="port-highlight">「北極圏のパリ」</span>と称される美しい都市です。メキシコ湾流の影響で、緯度の割に温暖な気候を保ち、冬でも港が凍結しません。19世紀から北極海探検の拠点として発展し、アムンゼンやナンセンなど著名な探検家たちがここから極地へと旅立ちました。現在も北極研究の最前線基地として、世界中の科学者が集まります。</p>
+                    <p>人口約7万7000人のこの都市は、北極圏最大の都市のひとつで、トロムソ大学には世界最北の大学として<span class="port-highlight">極地研究センター</span>があります。また、ノルウェー極地研究所の本部も置かれ、気候変動や海洋生態系の研究が行われています。港湾施設は最新鋭で、大型砕氷船の母港として年間を通じて稼働。燃料補給、食料調達、船舶修理のすべてに対応可能です。</p>
+                    <p>観光面では、<span class="port-highlight">オーロラ観測の世界的名所</span>として知られ、9月から4月にかけてオーロラベルトの真下に位置するため、高確率で観測できます。北極大聖堂やケーブルカーで登るストールシュタイネン山からの眺望も人気。また、サーミ人の文化体験やトナカイそり、犬ぞりなどのアクティビティも充実。夏季は白夜となり、5月21日から7月21日までは太陽が沈みません。港にはフィッシュマーケットがあり、新鮮な北極海の海産物を楽しめます。</p>
+                    <a href="https://ja.wikipedia.org/wiki/トロムソ" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="port-card supply">
+                <div class="port-number">3</div>
+                <div class="port-header">
+                    <span class="port-flag">🇳🇴</span>
+                    <div class="port-info">
+                        <div class="port-name">ロングイェールビーン</div>
+                        <div class="port-country">スヴァールバル諸島（ノルウェー領）</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 2,400人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🗺️</span>
+                        <span>北緯78度・世界最北の町</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">研究基地</span>
+                    <span class="feature-badge">極地補給</span>
+                    <span class="feature-badge">石炭積出港</span>
+                </div>
+                <div class="port-description">
+                    <p>ロングイェールビーンは北緯78度に位置する<span class="port-highlight">世界最北の町のひとつ</span>で、スヴァールバル諸島の行政・経済の中心地です。1906年にアメリカ人実業家ジョン・ロングイェアが石炭採掘を開始して以来、極地における人類の前哨基地として発展してきました。現在は研究と観光が主要産業となり、世界中から科学者や冒険家が集まる国際的な町となっています。</p>
+                    <p>特筆すべきは<span class="port-highlight">「スヴァールバル世界種子貯蔵庫」</span>の存在です。2008年に開設されたこの施設は、永久凍土の中に建設された「地球最後の日の貯蔵庫」として、世界中から100万種類以上の種子サンプルを保管しています。また、世界最北の大学「スヴァールバル大学センター」では、極地科学の最先端研究が行われ、年間350人以上の学生が気候変動や極地生態系について学んでいます。</p>
+                    <p>町の生活は驚くほど文明的で、レストラン、博物館、図書館、病院などが完備。特に有名なのは1951年創業の「フーセット・レストラン」で、<span class="port-highlight">ヨーロッパ最大級のワインセラー</span>（2万本以上）を誇ります。一方で、町には独特のルールがあり、建物の外では銃の携帯が義務付けられ（ホッキョクグマ対策）、死亡・出産は原則禁止（医療設備の限界のため本土への移送が必要）という、極地ならではの現実も。4月20日から8月23日は白夜、10月26日から2月15日は極夜となり、まさに地球の果ての町です。</p>
+                    <a href="https://ja.wikipedia.org/wiki/ロングイェールビーン" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="section-divider">❄️ グリーンランド海域 ❄️</div>
+            
+            <div class="port-card minor">
+                <div class="port-number">4</div>
+                <div class="port-header">
+                    <span class="port-flag">🇬🇱</span>
+                    <div class="port-info">
+                        <div class="port-name">カーナーク（Qaanaaq）</div>
+                        <div class="port-country">グリーンランド（デンマーク領）</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 650人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🏔️</span>
+                        <span>北緯77度・極北の集落</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">イヌイット集落</span>
+                    <span class="feature-badge">犬ぞり文化</span>
+                    <span class="feature-badge">緊急避難港</span>
+                </div>
+                <div class="port-description">
+                    <p>カーナーク（Qaanaaq）は北緯77度26分、<span class="port-highlight">グリーンランド最北の町</span>であり、北極点からわずか1,350kmの位置にあります。この町は1953年、米国のチューレ空軍基地拡張のために元の集落ウーマナックから強制移住された116人のイヌイット（イヌグイット）によって建設された、グリーンランドで最も新しい町です。この悲劇的な歴史にもかかわらず、住民たちは極北の地で独自の文化を守り続けています。</p>
+                    <p>イヌグイット語という独特の方言が話され、<span class="port-highlight">伝統的な海洋哺乳類狩猟</span>が今も生活の中心です。ナッキョク（イッカク）、セイウチ、アザラシ、ホッキョクグマなどを狩り、その全てを余すことなく利用します。特に有名なのは「キビヤック」という発酵食品で、アザラシの腹に海鳥を詰めて地中で数ヶ月発酵させる、極地ならではの保存食です。年間を通じて犬ぞりが主要な交通手段で、約1,000頭のグリーンランド犬が町で飼育されています。</p>
+                    <p>観光面では、<span class="port-highlight">世界最北の伝統文化体験</span>が可能です。夏は24時間太陽が沈まない白夜（5月19日～7月24日）、冬は3.5ヶ月太陽が昇らない極夜を体験できます。探検家クヌート・ラスムセンの旧居が博物館となっており、7つのチューレ探検の歴史を学べます。「ウルティマ・チューレ工芸センター」では、セイウチの牙やトナカイの角から作られる精巧な工芸品が有名。年2回しか貨物船が来ない極限の隔絶性が、逆に純粋な極地文化を保存し、訪れる者に本物の北極体験を提供しています。</p>
+                    <a href="https://en.wikipedia.org/wiki/Qaanaaq" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+            </div>
+            
+            <div class="port-card minor">
+                <div class="port-number">5</div>
+                <div class="port-header">
+                    <span class="port-flag">🇨🇦</span>
+                    <div class="port-info">
+                        <div class="port-name">グライズフィヨルド</div>
+                        <div class="port-country">カナダ・ヌナブト準州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 130人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🦭</span>
+                        <span>カナダ最北の民間集落</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">セイウチ狩猟</span>
+                    <span class="feature-badge">小型船専用</span>
+                </div>
+                <div class="port-description">
+                    <p>グライズフィヨルドは<span class="port-highlight">カナダ最北の民間集落</span>として知られーンズ海峡に面した小さな集落です。1953年にカナダ政府の北極主権確立政策により、ケベック州北部のイヌイットとバフィン島のイヌイット、合計約10家族がこの地に移住させられました。現在の人口わずか130人という極小コミュニティですが、強い結束力と伝統文化への誇りを持ち続けています。</p>
+                    <p>集落名の「グライズフィヨルド」はノルウェー語で「豚のフãの生息地であることに由来します。実際、<span class="port-highlight">世界有数のセイウチ観察地</span>として知られ、夏季には数百頭のセイウチが近海の氷盤で日光浴をする姿が見られます。伝統的なセイウチ狩猟は今も行われており、その象牙は貴重な工芸品の材料となります。また、ホッキョククジラ、ナッキョク、ベルーガなども豊富に生息しています。</p>
+                    <p>イã電力は ディーゼル発電機に依存し、飲料水は夏に川から、冬は氷から確保します。しかし、この隔絶性が<span class="port-highlight">純粋なイヌイット文化</span>を保存しています。24時間の太陽が4ヶ月続く夏と、4ヶ月の極夜という極端な環境下で、住民たちは伝統的な狩猟、釣り、工芸品製作で生計を立てています。小型船のみ接岸可能な簡素な港ですが、北西航路を通過する船にとに触れられる貴重な寄港地となっています。</p>
+                </div>
+            </div>
+            
+            <div class="section-divider">🗺️ カナダ北極諸島 🗺️</div>
+            
+            <div class="port-card supply">
+                <div class="port-number">6</div>
+                <div class="port-header">
+                    <span class="port-flag">🇨🇦</span>
+                    <div class="port-info">
+                        <div class="port-name">レゾリ</div>
+                        <div class="port-country">カナダ・ヌナブト準州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 200人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">✈️</span>
+                        <span>åµ圏航空拠点</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">補給基地</span>
+                    <span class="feature-badge">気象観測所</span>
+                    <span class="feature-badge">救難拠点</span>
+                </div>
+                <div class="port-description">
+                    <p>レゾリュートは北緯74度41分に位置し、<span class="port-highlight">カナダåan>として重要な役割を果たしています。1947年、カナダとアメリカが共同で気象観測所を設置したことから始まり、1953年にはイヌイットの強制移住により恒久的な集落となりました。現在は北極研究と探検の拠点として、また北西航路を航行する船舶の重要な補給基地として機能しています。</p>
+                    <p>「レゾリュート」の名は、1850年に行方不明となったフランクリン探めに派遣された英国海軍艦HMSレゾリュートに由来します。現在は<span class="port-highlight">極地研究の最前線基地</span>として、カナダ極地大陸棚プロジェクトの本部が置かれ、世界中から科学者が集まります。年間平均気温は-16.4℃、最寒月の2月は-32.4℃という過酷な環境ですが、最新の研究施設と宿泊施設が整備されています。</p>
+                    <p>航空インフラが充実しており、レã¥ート空港は北極圏の航空ハブとして機能。燃料補給施設、食料倉庫、医療施設も完備され、<span class="port-highlight">北極圏での緊急救難活動の中心地</span>となっています。カナダ軍の北極訓練センターもあり、極地でのサバイバル訓練が行われています。北西航路を通過する船舶にとって、最後の確実な補給機会となることが多く、燃料、食料、飲料水の補給はもちろん、気象情å¦も重要。夏季には多数の探検クルーズ船が寄港し、北極点への探検の出発点としても利用されています。</p>
+                    <a href="https://en.wikipedia.org/wiki/Resolute,_Nunavut" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+            </div>
+            
+            <div class="port-card minor">
+                <div class="port-number">7</div>
+                <div class="port-header">
+                    <span class="port-flag">🇨🇦</span>
+                    <div class="port-info">
+                        <div class="port-name">アークティックベイ</div>
+                        <div class="port-country">カナダ・ヌナブト準州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 870人</span>
+                  </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🐋</span>
+                        <span>ホッキョククジラの生息地</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">イヌイット文化</span>
+                    <span class="feature-badge">伝統工芸品</span>
+                </div>
+                <div class="port-description">
+                    <p>アークティックベイは北緯73度に位置し、<span class="port-highlight">バフィン島北部最大の集落</span>です。アドミラルティ湾の奥深くに位置し、夏季でも流氷が残る厳しい環境にありながら、豊かなイヌイット文化が息づいています。ホッキョククジラの回遊ルート上にあり、伝統的な捕鯨が今も重要な生活の一部となっています。</p>
+                    <p>約870人の住民の多くはイヌイットで、イヌクティトゥット語が日常的に使用されています。<span class="port-highlight">「イクパルユク」</span>（囲いの場所）という伝統名を持ち、かつてはカリブーを崖から追い落として狩る場所でした。現在も伝統的な狩猟と現代的な生活が共存し、セイウチ、アザラシ、ホッキョクグマなどの狩猟が行われています。</p>
+                    <p>観光面では、<span class="port-highlight">手つかずの北極自然</span>が最大の魅力です。夏季にはベルーガやナッキョクの群れが湾内に入り、秋にはホッキョククジラが通過します。また、世界クラスのイヌイット芸術家が多く住み、石彫刻や版画は国際的に高い評価を受けています。港は小規模ですが、探検クルーズ船の寄港地として人気があり、本物の北極文化体験ができる貴重な場所です。</p>
+                    <a href="https://en.wikipedia.org/wiki/Arctic_Bay" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+            </div>
+            
+            <div class="port-card minor">
+                <div class="port-number">8</div>
+                <div class="port-header">
+                    <span class="port-flag">🇨🇦</span>
+                    <div class="port-info">
+                        <div class="port-name">ポンドインレット</div>
+                        <div class="port-country">カナダ・ヌナブト準州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 1,600人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🏔️</span>
+                        <span>氷河観光の拠点</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">観光船寄港</span>
+                    <span class="feature-badge">芸術村</span>
+                </div>
+                <div class="port-description">
+                    <p>ポンドインレットは北緯72度、バフィン島北端に位置し、<span class="port-highlight">「北極圏の宝石」</span>と呼ばれる美しい集落です。エクリプス海峡とランカスター海峡の交差点にあり、壮大な氷河と険しい山々に囲まれた絶景の地です。イヌイット名「ミティマタリク」は「ミティマの場所」を意味し、伝統的な交易の中心地でした。</p>
+                    <p>人口約1,600人のこの集落は、<span class="port-highlight">イヌイット芸術の中心地</span>として国際的に知られています。特に石彫刻、版画、タペストリーは世界的に評価が高く、カナダ国立美術館にも作品が収蔵されています。地元の協同組合「タヤニ・アーツ」では、アーティストが伝統技法を用いて現代的な作品を創作しています。</p>
+                    <p>観光面では、<span class="port-highlight">サーミリュート氷河</span>への玄関口として人気があります。この氷河は北極圏で最もアクセスしやすい氷河の一つで、夏季にはゾディアックボートで氷河の前面まで接近できます。また、セイウチ、イッカク、ホッキョクグマ、ベルーガなど北極の野生動物が豊富で、特に春のフローエッジ（流氷の縁）では、驚くほど多様な海洋生物を観察できます。探検クルーズ船の人気寄港地で、本格的な北極体験を求める観光客が年々増加しています。</p>
+                    <a href="https://en.wikipedia.org/wiki/Pond_Inlet" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+            </div>
+            
+            <div class="port-card supply">
+                <div class="port-number">9</div>
+                <div class="port-header">
+                    <span class="port-flag">🇨🇦</span>
+                    <div class="port-info">
+                        <div class="port-name">ケンブリッジベイ</div>
+                        <div class="port-country">カナダ・ヌナブト準州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 1,800人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🔬</span>
+                        <span>北極研究ステーション</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">科学研究基地</span>
+                    <span class="feature-badge">地域ハブ</span>
+                    <span class="feature-badge">空港併設</span>
+                </div>
+                <div class="port-description">
+                    <p>ケンブリッジベイは北緯69度、ビクトリア島南岸に位置し、<span class="port-highlight">カナダ北極圏研究の中心地</span>として急速に発展しています。2019年に完成したã«ナダ高緯度北極研究ステーション（CHARS）」は、世界最先端の極地研究施設として、気候変動、北極生態系、持続可能な開発などの研究を行っています。この施設の建設には約2億5000万カナダドルが投資され、北極圏における科学技術イノベーションの拠点となっています。</p>
+                    <p>歴史的には、1920年代にハドソン湾会社の交易所として設立され、北西航路探検の重è¾在は<span class="port-highlight">北西航路の「関門」</span>として知られ、東西どちらから来た船も必ず通過する戦略的要衝です。夏季には多数の探検クルーズ船が寄港し、補給と情報交換の場となっています。地元のイヌイットコミュニティは約1,800人で、伝統と現代が融合した生活を送っています。</p>
+                    <p>インフラ面では、通年運用の空港、近代的な医療施設、高速イãル、レストランなどが整備され、北極圏の町としては例外的に充実しています。<span class="port-highlight">NASA の北極観測プロジェクト</span>の拠点でもあり、特殊センサーを搭載した観測機が定期的に飛来します。また、3Dプリンターやロボット技術など最新テクノロジーの実験場となっており、「STRETCH」という遠隔操作ロボットは世界中から操作可能。伝統的なムスクオックス狩猟科学が共存する、21世紀の北極を象徴する港町です。</p>
+                    <a href="https://en.wikipedia.org/wiki/Cambridge_Bay" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+            </div>
+            
+            <div class="port-card minor">
+                <div class="port-number">10</div>
+                <div class="port-header">
+                    <span class="port-flag">🇨🇦</span>
+                    <div clas-info">
+                        <div class="port-name">ジョアヘイブン</div>
+                        <div class="port-country">カナダ・ヌナブト準州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 1,100人</span>
+                    </div>
+                    <div class="detail-item">
+              <span class="detail-icon">🎣</span>
+                        <span>北極イワナ漁業</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">漁港</span>
+                    <span class="feature-badge">フランクリン探検隊史跡</span>
+                </div>
+                <div class="port-description">
+                    <p>ジョアヘイブンは北緯68度、キングウィリアム島に位置し、<span class="port-highlight">フランクリン探検隊の悲劇</span>と深い関わりを持つ歴史的な集落です。1845年に消息を絶ったフランクリン探検隊の船「エレバス号」と「テラー号」が2014年と2016年に近海で発見され、世界的な注目を集めました。</p>
+                    <p>人口約1,100人のこの集落は、<span class="port-highlight">北極イワナの漁業基地</span>として知られています。キングウィリアム島周辺の湖や川には巨大な北極イワナが生息し、世界中から釣り愛好家が訪れます。夏季には24時間釣りが可能で、20ポンド（約9kg）を超える大物も珍しくありません。</p>
+                    <p>文化面では、ネツィリク・イヌイットの伝統が色濃く残り、<span class="port-highlight">伝統的なドラムダンス</span>や喉歌（カタジャク）が今も行われています。地元の文化センターでは、フランクリン探検隊に関する展示や、イヌイットの口承伝承に残る探検隊の記録を学ぶことができます。小規模な港ですが、北西航路の歴史を体感できる重要な寄港地です。</p>
+                    <a href="https://en.wikipedia.org/wiki/Gjoa_Haven" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+            </div>
+            
+            <div class="section-divider">🌊 ボーフォート海・アラスカ沿岸 🌊</div>
+            
+    <div class="port-card supply">
+                <div class="port-number">11</div>
+                <div class="port-header">
+                    <span class="port-flag">🇨🇦</span>
+                    <div class="port-info">
+                        <div class="port-name">タクトヤクタック</div>
+                        <div class="port-country">カナダ・北西準州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 900人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">⛽</span>
+                        <span>石油・ガス供給基地</span>
+                    </div>
+                </div>
+                <div class="port-description">
+                    <p>タクトヤクタックは<span class="port-highlight">カナダ最北の本土の町</span>で、マッケンジー川河口に位置する重要な石油・天然ガス生産拠点です。イヌヴィアルイット・セトルメント地域の行政中心地であり、冷戦時代にはDEWライン（Distant Early Warning Line）の重要な監視基地でもありました。町の名前は「カリブーが水を渡る場所」を意味するイヌヴィアルイット語に由来します。</p>
+                    <p>人口約900人のこの町は、<span class="port-highlight">極北の産業町</span>として発展しました。近郊のリアード盆地は天然ガスの豊富な埋蔵地として知られ、カナダの北極エネルギー戦略の要となっています。また、北極海への玄関口として、夏季には大型貨物船が寄港し、極地探検や科学研究の補給拠点となります。</p>
+                    <p>この地域は<span class="port-highlight">イヌヴィアルイット文化</span>が色濃く残る場所でもあり、伝統的な捕鯨、狩猟、漁業が今も行われています。特に7月に開催される「ベルーガ祭り」では、シロイルカの群れが河口に集まる様子を観察でき、地元の音楽やダンスも楽しめます。海氷が解ける夏季には北極海航路の重要な補給港となり、燃料、食料、真水の補給が可能です。厳しい環境ながら、現代文明と伝統文化が共存する興味深い町です。</p>
+                    <a href="https://en.wikipedia.org/wiki/Tuktoyaktuk" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">燃料補給</span>
+                    <span class="feature-badge">深水港</span>
+                    <span class="feature-badge">DEWライン基地跡</span>
+                </div>
+            </div>
+            
+            <div class="port-card major">
+                <div class="port-number">12</div>
+                <div class="port-header">
+                    <span class="port-flag">🇺🇸</span>
+                    <div class="port-info">
+                        <div class="port-name">プルドーベイ</div>
+                        <div class="port-country">アメリカ・アラスカ州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">🛢️</span>
+                        <span>北米最大の油田</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🚁</span>
+                        <span>ヘリポート完備</span>
+                    </div>
+                </div>
+                <div class="port-description">
+                    <p>プルドーベイは北緯70度、アラスカ北部の<span class="port-highlight">北米最大の油田地帯</span>で、米国の国内石油生産量の約13%を担う重要なエネルギー拠点です。1968年の発見以来、繰り返しの探査と開発で極地石油産業が確立され、現在も日産約50万バレルを産出しています。この地域は1977年に完成したアラスカパイプラインの起点でもあります。</p>
+                    <p>極地産業の中心地として、<span class="port-highlight">世界最先端の冷地技術</span>が集約されています。最低温度が-50℃を下回る厄酷な環境下で、特殊な耐寒装置や永久凍土対応の設備が使用されています。ヘリポート、滑走路、住宅施設などのインフラが完備し、約4,000名の作業員が交代勤務で従事しています。</p>
+                    <p>北極海航路の観点からは、プルドーベイは<span class="port-highlight">重要な補給・緒在基地</span>となります。夏季には海氷が后退し、貨物船や研究船の訪問が可能になり、燃料補給、食料調達、治療サービスなどを提供します。人工島の様な産業施設でありながら、北極産の動物たちと的確な環境共存を目指し、北極海上での緊急時の防災拠点としての役割も果たしています。</p>
+                    <a href="https://en.wikipedia.org/wiki/Prudhoe_Bay,_Alaska" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">石油積出港</span>
+                    <span class="feature-badge">産業港</span>
+                    <span class="feature-badge">アラスカパイプライン起点</span>
+                </div>
+            </div>
+            
+            <div class="port-card supply">
+                <div class="port-number">13</div>
+                <div class="port-header">
+            <span class="port-flag">🇺🇸</span>
+                    <div class="port-info">
+                        <div class="port-name">バロー（ウトキアグヴィク）</div>
+                        <div class="port-country">アメリカ・アラスカ州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 4,500ä                  </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🗺️</span>
+                        <span>米国最北端の都市</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">極地研究センター</span>
+                    <span class="feature-badge">クジラ祭り</span>
+                    <span class="feature-badge">空港あり</span>           </div>
+                <div class="port-description">
+                    <p>バロー（現在の正式名称：ウトキアグヴィク）は北緯71度17分に位置する<span class="port-highlight">アメリカ最北端の都市</span>で、北極海に面した人口約4,500人の町です。2016年、住民投票により伝統的なイヌピアット語の名称「ウトキアグヴィク」（雪フクロウが狩りをする場所）に改名されましたが、今も「バロー」のす。5月10日から8月2日まで84日間太陽が沈まない白夜、11月18日から1月23日まで67日間太陽が昇らない極夜という極端な環境です。</p>
+                    <p>この町は<span class="port-highlight">北極クジラ研究の世界的中心地</span>として知られ、春と秋にホッキョククジラの大移動が見られます。伝統的な捕鯨は今も続いており、年間約20頭の捕獲枠内で行われる捕鯨は、コミュニティ全体で分éに開催される「ナルカタック祭」では、セイウチの皮で作ったトランポリンでのブランケット・トスや、マクタック（クジラの皮と脂肪）の振る舞いなど、イヌピアット文化を体験できます。</p>
+                    <p>科学研究面では、バロー北極科学コンソーシアムやNOAAの気候観測所があり、<span class="port-highlight">地球温暖化研究の最前線</span>となっています。永久凍土の融解、æ³»の変化などが リアルタイムで観測されています。港湾施設は基本的ですが、耐氷船の接岸が可能で、燃料補給施設も完備。アラスカ北斜面の石油産業を支える物流拠点でもあり、年間を通じて貨物機が飛来します。町にはイヌピアット遺産センター、ホッキョクグマの剥製で有名な博物館、そして世界最北端の高校があり、極地でありながら活気ある コミュニティライフが営ます。</p>
+                    <a href="https://ja.wikipedia.org/wiki/ユトゥキアグヴィック" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="port-card minor">
+                <div class="port-number">14</div>
+                <div class="port-header">
+                    <span class="port-flag">🇺🇸</span>
+                    <div class="port-info">
+                        <div class="port-name">ポイントホープ</div>
+                        <div class="port-country">アメリカ・アラスカ州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 700人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🏛️</span>
+                        <span>2,500年の歴史</span>
+                    </div>
+                </div>
+                <div class="port-description">
+                    <p>ポイントホープは北緯68度、チュクチ海に突き出た岬に位置する<span class="port-highlight">アラスカ最古の継続居住地</span>のひとつで、約2,500年前から人々が住み続けています。イヌピアット語で「ティケラック」（指を指す場所）と呼ばれ、ベーリング海峡地域の重要な文化的・歴史的拠点です。1848年にイギリス海軍のフランクリン探検隊救助活動中に「ポイントホープ」と命名されました。</p>
+                    <p>この集落の最大の特徴は、<span class="port-highlight">伝統的な捕鯨文化</span>が現在も色濃く残っていることです。春には巨大なホッキョククジラが岬の沖を通過し、村全体が協力して伝統的な方法で捕鯨を行います。人口約700人の住民の多くはイヌピアット系で、何世紀も受け継がれてきた捕鯨技術と海洋知識を保持しています。捕獲されたクジラは村全体で分け合い、「ナルカタック」という感謝祭では、クジラの肉と脂肪を共有する伝統的な祝祭が行われます。</p>
+                    <p>考古学的には<span class="port-highlight">極めて重要な遺跡群</span>があり、「イピウタック文化」（紀元前100年〜紀元後600年）の中心地のひとつとされています。1939年の発掘調査では、象牙細工や青銅器など、シベリアとの交易を示す貴重な遺物が多数発見されました。現在も村の周辺には古代の住居跡や墓地が残り、北極圏の人類史研究において重要な場所となっています。厳しい自然環境の中で2,500年間継続してきた人類居住の奇跡を体現する、北極海航路上の貴重な文化遺産です。</p>
+                    <a href="https://en.wikipedia.org/wiki/Point_Hope,_Alaska" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る（英語）</a>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">古代遺跡</span>
+                    <span class="feature-badge">伝統捕鯨</span>
+                </div>
+            </div>
+            
+            <div class="section-divider">🌉 ベーリング海峡地域 🌉</div>
+            
+            <div class="port-card major">
+                <div class="port-number">15</div>
+                <div class="port-header">
+                    <span class="port-flag">🇺🇸</span>
+                    <div class="port-info">
+                        <div class="port-name">ノーム</div>
+                        <div class="port-country">アメリカ・アラスカ州</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 3,800人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">⛏️</span>
+                        <span>ゴールドラッシュの町</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">犬ぞりレース終点</span>
+                    <span class="feature-badge">金採掘</span>
+                    <span class="feature-badge">地域拠点</span>
+                </div>
+                <div class="port-description">
+                    <p>ノームは北緯64度30分、ベーリング海に面したアラスカ西部の港町で、<span class="port-highlight">1899年のゴールドラッシュ</span>で一夜にして誕生した歴史的な町です。最盛期には2万人を超える人口を擁しましたが、現在は約3,800人が暮らす静かな町となっています。しかし、世界的に有名な「アイディタロッドçレース」の終点として、また金採掘が今も続く「最後のフロンティア」として、独特の魅力を保ち続けています。</p>
+                    <p>町の名前の由来は興味深く、地図製作者が「?Name」（名前不明）と書いた文字が「Nome」と誤読されたという説があります。現在も<span class="port-highlight">海岸での砂金採り</span>が人気で、夏季には観光客が金パンを手に海岸を歩く姿が見られますãery Channelの人気番組「ベーリング海の一攫千金」の舞台でもあり、海底から金を採掘する現代のゴールドラッシュが続いています。町には3つの金買取店があり、地元民や観光客が持ち込む金を日々査定しています。</p>
+                    <p>ノームは<span class="port-highlight">ベーリング海峡地域の物流・交通の要</span>として重要な役割を果たしています。アラスカ西部の孤立した村々へã³供給基地であり、年間を通じて小型機が周辺の集落と結んでいます。港は5月から10月まで開港し、大型貨物船やクルーズ船が寄港。ロシアまでわずか160kmという地理的近さから、冷戦時代は軍事的要衝でもありました。現在は北西航路を通過する船舶の重要な補給港として、また気候変動により開かれつつある北極海航路の拠点として注目されています。イヌピアット、ユピック、シベリアユピックなど多様な先住民文化が混在し、カーラヴィック・イヌイット・ダンサーズの公演は必見です。</p>
+                    <a href="https://ja.wikipedia.org/wiki/ノーム_(アラスカ州)" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="section-divider">🗾 太平洋・日本へ 🗾</div>
+            
+            <div class="port-card major">
+        <div class="port-number">16</div>
+                <div class="port-header">
+                    <span class="port-flag">🇺🇸</span>
+                    <div class="port-info">
+                        <div class="port-name">ダッチハーバー</div>
+                        <div class="port-country">アメリカ・アリューシャン列島</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 4,300人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🦀</span>
+                        <span>カニ漁業の中心</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">漁業基地</span>
+                    <span class="feature-badge">船舶修理</span>
+                    <span class="feature-badge">燃料補給</span>
+                </div>
+                <div class="port-description">
+                    <p>ダッチハーバーは北太平洋とベーリング海の境界に位置する、<span class="port-highlight">世界最大規模の漁業港</span>の一つです。アリューシャン列島のウナラスカ島にあるこの港は、年間水揚げ量で全米トップクラスを誇り、カニ漁船の母港として世界的に知られています。特に冬季のタラバガニ漁とオピリオ蟹漁の拠点として、「世界で最も危険な仕事」として知られる漁業の最前線です。</p>
+                    <p>第二次世界大戦中は<span class="port-highlight">アメリカ海軍の重要な基地</span>として機能し、日本軍のアリューシャン侵攻に対する防衛拠点でした。現在でも戦争の痕跡が島内に残り、歴史的な興味を引く場所となっています。港湾施設は極めて充実しており、大型漁船の修理・補給から燃料補給まで、北太平洋の商業漁業を支える重要なインフラを提供しています。</p>
+                    <p>ダッチハーバーは北西航路の南端に位置し、<span class="port-highlight">太平洋と北極海を結ぶ重要な中継港</span>として機能しています。年間を通じて不凍港として利用可能で、北極海航路を通航する船舶の最終補給地点としての役割を担っています。アレウト族の伝統文化も色濃く残り、ロシア正教会の影響を受けた独特の文化的景観を見ることができます。</p>
+                    <a href="https://ja.wikipedia.org/wiki/ダッチハーバー" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="port-card major">
+                <div class="port-number">17</div>
+                <div class="port-header">
+                    <span class="port-flag">🇷🇺</span>
+                    <div class="port-info">
+                        <div class="port-name">ペトロパブロフスク・カムチャツキー</div>
+                        <div class="port-country">ロシア・カムチャツカ半島</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 18万人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">🌋</span>
+                        <span>火山と温泉の町</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">不凍港</span>
+                    <span class="feature-badge">海軍基地</span>
+                    <span class="feature-badge">観光拠点</span>
+                </div>
+                <div class="port-description">
+                    <p>ペトロパブロフスク・カムチャツキーは、カムチャツカ半島南東部に位置するロシアの<span class="port-highlight">太平洋艦隊の重要な軍港</span>です。18万人の人口を有するこの都市は、活火山に囲まれた世界でも珍しい立地にあり、アバチャ湾の美しい天然の良港として知られています。1740年にヴィトゥス・ベーリングとアレクセイ・チリコフによって建設され、ロシアの太平洋進出の拠点として発展しました。</p>
+                    <p>この都市の最大の特徴は、<span class="port-highlight">活火山群に囲まれた地形</span>です。コリャークスキー火山、アバチャ火山など複数の活火山が市街地を取り囲み、地熱エネルギーによる温泉が数多く存在します。火山性土壌による豊かな自然環境は、ヒグマ、オオワシ、ステラーカイギュウなど固有の野生動物の宝庫でもあります。冷戦時代は外国人の立ち入りが禁止された閉鎖都市でしたが、現在は観光地として開放されています。</p>
+                    <p>現在、ペトロパブロフスク・カムチャツキーは<span class="port-highlight">北太平洋航路の重要な寄港地</span>として注目されています。ロシア政府は北極海航路開発の一環として港湾施設の近代化を進めており、アジアとヨーロッパを結ぶ新たな海上交通路の拠点として期待されています。また、世界屈指のサーモン漁業基地でもあり、カムチャツカサーモンは日本を含む世界各国に輸出されています。カムチャツカ先住民のエヴェン族、コリャーク族の文化も保存され、独特の民族文化を体験できます。</p>
+                    <a href="https://ja.wikipedia.org/wiki/ペトロパブロフスク・カムチャツキー" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="port-card major">
+                <div class="port-number">18</div>
+                <div class="port-header">
+                    <span class="port-flag">🇯🇵</span>
+                    <div class="port-info">
+                        <div class="port-name">苫小牧港</div>
+                        <div class="port-country">日本・北海道</div>
+                    </div>
+                </div>
+                <div class="port-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">👥</span>
+                        <span>人口: 17万人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">⚓</span>
+                        <span>北海道最大の港</span>
+                    </div>
+                </div>
+                <div class="port-features">
+                    <span class="feature-badge">フェリーターミナル</span>
+                    <span class="feature-badge">工業港</span>
+                    <span class="feature-badge">ゴール！🎊</span>
+                </div>
+                <div class="port-description">
+                    <p>苫小牧港は北海道南西部、太平洋に面した<span class="port-highlight">北海道最大の港湾</span>で、北極海航路の日本側終着点として重要な役割を果たします。1963年に開港した人工港で、現在は年間貨物取扱量約1億トン、国内第4位の規模を誇ります。特に北米・アジア間のコンテナ輸送の拠点として、また国内最大級のフェリー基地として、海上物流の要衝となっています。</p>
+                    <p>港湾施設は東西に分かれ、西港区は主にコンテナターミナル、東港区は石油化学工業やエネルギー関連施設が集積。<span class="port-highlight">国際コンテナターミナル</span>では、最新のガントリークレーンが稼働し、大型コンテナ船の荷役に対応。また、LNG基地や石油備蓄基地もあり、エネルギー供給の拠点でもあります。冬季も凍結しない不凍港として、通年での安定した港湾運営が可能です。</p>
+                    <p>北極海航路の発展に向けて、苫小牧港は<span class="port-highlight">耐氷船対応施設の整備</span>を進めています。将来的に北極海経由でヨーロッパと結ばれる定期航路が実現すれば、輸送日数の大幅短縮により、日本の物流革命の起点となる可能性があります。市内には「北海道大学北極域研究センター」との連携も進み、極地航路に関する研究も活発。港周辺には工業地帯が広がり、製紙、自動車、石油化学など多様な産業が集積しています。人口17万人の苫小牧市は、「産業と港の街」として発展を続けています。ウトナイ湖のラムサール条約登録地など、自然環境との共生も図られています。</p>
+                    <a href="https://ja.wikipedia.org/wiki/苫小牧港" target="_blank" class="wiki-link">📖 Wikipedia で詳しく見る</a>
+                </div>
+            </div>
+            
+            <div class="tips-section">
+                <h2 class="tips-title">🎒 港での楽しみ             
+                <div class="tip-item">
+                    <span class="tip-icon">🛍️</span>
+                    <div>
+                        <strong>各地の特産品を集めよう！</strong>
+                        <p>イヌイットの工芸品、ロシアのマトリョーシカ、アラスカの金製品など</p>
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">📸</span>
+        iv>
+                        <strong>記念撮影スポット</strong>
+                        <p>各港の標識、灯台、地元の人々との交流写真を撮ろう</p>
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">🍲</span>
+                    <div>
+                        <strong>ローカルフードを味わう</strong>
+                        <p>セイウチ料理、トナカイシチュー、åなど</p>
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">🎭</span>
+                    <div>
+                        <strong>文化体験</strong>
+                        <p>イヌイットの歌と踊り、犬ぞり体験、オーロラ観測</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="summary">
+                <h3>🎯 航路のまとめ</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">寄港地</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">国・地域</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15,000km</div>
+                        <div class="stat-label">総航行距離</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">25-35日</div>
+                        <div class="stat-label">航行日数</div>
+                    </div>
+                </div>
+                
+                <div class="wildlife">
+                    <span>🐻‍❄️</span>
+                    <span>🦭</span>
+                    <span>🐋</span>
+                    <span>🦌</span>
+                </div>
+            </div>
+            
+            <div class="warning">
+                <strong>⚠️ ご注意</strong>
+                <p>実際の航行では、海氷状況により寄港できない港が多数あります。
+                また、多くの港は夏季のみ利用可能で、専門的な装備と許可が必要です。</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🧊 18の港町をな北極海の旅 🧊</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                各地の文化と自然に触れる特別な航路体験
+            </p>
+        </div>
+    </div>
+</body>
+</html>
