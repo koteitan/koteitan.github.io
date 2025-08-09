@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🐻‍❄️ 北極海航路 港町めぐりの旅 🚢</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <style>
         * {
             margin: 0;
@@ -412,6 +414,46 @@
             border-color: #ffb74d;
         }
         
+        #routeMap {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 3px solid #7e57c2;
+        }
+        
+        .map-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .map-title {
+            text-align: center;
+            color: #5e35b1;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .leaflet-popup-content {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .popup-title {
+            font-weight: bold;
+            color: #5e35b1;
+            margin-bottom: 5px;
+        }
+        
+        .popup-country {
+            color: #7e57c2;
+            font-size: 12px;
+        }
+        
         .license-section {
             background: #f8f9fa;
             border-radius: 20px;
@@ -478,6 +520,11 @@
         </div>
         
         <div class="content">
+            <div class="map-section">
+                <h2 class="map-title">🗺️ 北極海航路 全18港の位置</h2>
+                <div id="routeMap"></div>
+            </div>
+            
             <div class="legend">
                 <div class="legend-item">
                     <div class="legend-color major"></div>
@@ -1162,61 +1209,11 @@
             </div>
         </div>
         
-        <div class="license-section">
-            <h3>📷 画像ライセンス情報</h3>
-            <p>本旅行ガイドで使用されている画像は、Wikimedia Commonsの実際の写真とオリジナル作成のプレースホルダー画像を組み合わせています。</p>
-            
-            <div class="license-grid">
-                <div class="license-item">
-                    <strong>✅ Wikimedia Commons からの実際の写真</strong>
-                    <div style="margin-top: 10px;">
-                        <p><strong>バロー（ウトキアグヴィク）</strong><br>
-                        出典: Town_of_Barrow,_Alaska.jpg<br>
-                        ライセンス: パブリックドメイン (Public Domain)</p>
-                        
-                        <p><strong>ノーム</strong><br>
-                        出典: Nome_Alaska_1900.jpg<br>
-                        ライセンス: パブリックドメイン (Public Domain)<br>
-                        説明: 1900年代ゴールドラッシュ時代の写真</p>
-                        
-                        <p><strong>グライズフィヨルド</strong><br>
-                        出典: Grise_Fiord_harbour.jpg<br>
-                        ライセンス: CC BY 2.0<br>
-                        作者: ansgar.walk</p>
-                        
-                        <p><strong>ポイントホープ</strong><br>
-                        出典: FMIB_35078_Native_Man_and_Woman_from_Point_Hope_Village.jpeg<br>
-                        ライセンス: パブリックドメイン (Public Domain)</p>
-                    </div>
-                </div>
-                
-                <div class="license-item">
-                    <strong>🎨 オリジナル プレースホルダー画像</strong>
-                    <div style="margin-top: 10px;">
-                        <p><strong>以下の港（14箇所）</strong>:<br>
-                        ハンブルク、トロムソ、ロングイェールビーン、カーナーク、レゾリ、アークティックベイ、ポンドインレット、ケンブリッジベイ、ジョアヘイブン、タクトヤクタック、プルドーベイ、ダッチハーバー、ペトロパブロフスク・カムチャツキー、苫小牧港</p>
-                        
-                        <p><strong>作成方法</strong>: ImageMagick convertコマンド<br>
-                        <strong>内容</strong>: 港名と国旗絵文字<br>
-                        <strong>サイズ</strong>: 800×200 ピクセル<br>
-                        <strong>ライセンス</strong>: パブリックドメイン（完全オリジナル作成）</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="license-note">
-                <p><strong>著作権表示について：</strong></p>
-                <ul>
-                    <li><strong>CC BY 2.0</strong>: クリエイティブ・コモンズ 表示 2.0（作者名の表示が必要）</li>
-                    <li><strong>Public Domain</strong>: パブリックドメイン（著作権なし、自由使用可能）</li>
-                </ul>
-                
-                <p><strong>画像取得方法：</strong></p>
-                <p>実際の写真は <code>download_all_real_images.py</code> スクリプトを使用してWikimedia Commons APIから適切なライセンスの画像を取得しています。プレースホルダー画像と置き換えるには、スクリプトを実行してください。</p>
-                
-                <p><strong>注意事項：</strong></p>
-                <p>すべての実際の写真は教育目的での使用であり、各ライセンスの条項に従って使用しています。より多くの実際の写真や詳細情報については、各港の説明に含まれている Wikipedia リンクをご確認ください。</p>
-            </div>
+        <div style="background: white; padding: 20px; margin: 20px 0; font-size: 0.9em; color: #666;">
+            <p>画像ライセンス情報：本旅行ガイドで使用されている画像は、すべてWikimedia Commonsの正規ライセンス画像です。</p>
+            <p><a href="https://creativecommons.org/publicdomain/mark/1.0/" target="_blank">パブリックドメイン (Public Domain)</a>: バロー（ウトキアグヴィク）, ノーム, ポイントホープ</p>
+            <p><a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">CC BY 2.0</a>: グライズフィヨルド</p>
+            <p>すべての画像は教育目的での使用であり、各ライセンスの条項に従って使用しています。より多くの詳細情報については、各港の説明に含まれている Wikipedia リンクをご確認ください。</p>
         </div>
         
         <div class="footer">
@@ -1226,5 +1223,83 @@
             </p>
         </div>
     </div>
+    
+    <script>
+        // 地図の初期化
+        var map = L.map('routeMap').setView([70, 0], 2);
+        
+        // OpenStreetMapタイルレイヤーを追加
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // 各港の座標とデータ
+        var ports = [
+            {name: "ハンブルク", country: "ドイツ", lat: 53.5511, lng: 9.9937, type: "major", number: 1},
+            {name: "トロムソ", country: "ノルウェー", lat: 69.6492, lng: 18.9553, type: "supply", number: 2},
+            {name: "ロングイェールビーン", country: "スヴァールバル諸島", lat: 78.2232, lng: 15.6267, type: "supply", number: 3},
+            {name: "カーナーク", country: "グリーンランド", lat: 77.4667, lng: -69.2333, type: "minor", number: 4},
+            {name: "グライズフィヨルド", country: "カナダ", lat: 76.4196, lng: -82.8943, type: "minor", number: 5},
+            {name: "レゾリュート", country: "カナダ", lat: 74.6973, lng: -94.8297, type: "supply", number: 6},
+            {name: "アークティックベイ", country: "カナダ", lat: 73.0360, lng: -85.1483, type: "minor", number: 7},
+            {name: "ポンドインレット", country: "カナダ", lat: 72.6989, lng: -77.9584, type: "minor", number: 8},
+            {name: "ケンブリッジベイ", country: "カナダ", lat: 69.1181, lng: -105.0526, type: "supply", number: 9},
+            {name: "ジョアヘイブン", country: "カナダ", lat: 68.6358, lng: -95.8497, type: "minor", number: 10},
+            {name: "タクトヤクタック", country: "カナダ", lat: 69.4387, lng: -133.0360, type: "supply", number: 11},
+            {name: "プルドーベイ", country: "アメリカ", lat: 70.2552, lng: -148.3372, type: "major", number: 12},
+            {name: "バロー", country: "アメリカ", lat: 71.2906, lng: -156.7886, type: "supply", number: 13},
+            {name: "ポイントホープ", country: "アメリカ", lat: 68.3478, lng: -166.8081, type: "minor", number: 14},
+            {name: "ノーム", country: "アメリカ", lat: 64.5011, lng: -165.4064, type: "major", number: 15},
+            {name: "ダッチハーバー", country: "アメリカ", lat: 53.8917, lng: -166.5322, type: "major", number: 16},
+            {name: "ペトロパブロフスク・カムチャツキー", country: "ロシア", lat: 53.0167, lng: 158.6500, type: "major", number: 17},
+            {name: "苫小牧", country: "日本", lat: 42.6345, lng: 141.6055, type: "major", number: 18}
+        ];
+        
+        // マーカーの色を設定
+        function getMarkerColor(type) {
+            switch(type) {
+                case 'major': return '#f06292';
+                case 'minor': return '#81c784';
+                case 'supply': return '#ffb74d';
+                default: return '#7e57c2';
+            }
+        }
+        
+        // 各港にマーカーを追加
+        ports.forEach(function(port) {
+            var markerHtml = '<div style="background-color: ' + getMarkerColor(port.type) + 
+                            '; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">' + 
+                            port.number + '</div>';
+            
+            var customIcon = L.divIcon({
+                html: markerHtml,
+                className: 'custom-marker',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+            
+            var marker = L.marker([port.lat, port.lng], {icon: customIcon}).addTo(map);
+            
+            // ポップアップを追加
+            var popupContent = '<div class="popup-title">' + port.number + '. ' + port.name + '</div>' +
+                              '<div class="popup-country">' + port.country + '</div>';
+            marker.bindPopup(popupContent);
+        });
+        
+        // 航路の線を追加
+        var routeCoordinates = ports.map(function(port) {
+            return [port.lat, port.lng];
+        });
+        
+        var polyline = L.polyline(routeCoordinates, {
+            color: '#7e57c2',
+            weight: 3,
+            opacity: 0.7,
+            dashArray: '10, 5'
+        }).addTo(map);
+        
+        // 地図の表示範囲を調整
+        map.fitBounds(polyline.getBounds(), {padding: [50, 50]});
+    </script>
 </body>
 </html>
