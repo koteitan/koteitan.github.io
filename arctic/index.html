@@ -126,6 +126,21 @@
             margin-bottom: 10px;
         }
         
+        .port-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 3px solid #f5f5f5;
+            transition: all 0.3s ease;
+        }
+        
+        .port-image:hover {
+            border-color: #7e57c2;
+            transform: scale(1.02);
+        }
+        
         .wiki-link {
             display: inline-flex;
             align-items: center;
@@ -396,6 +411,63 @@
             background: #fff3e0;
             border-color: #ffb74d;
         }
+        
+        .license-section {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .license-section h3 {
+            color: #5e35b1;
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .license-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .license-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .license-item strong {
+            color: #7e57c2;
+        }
+        
+        .license-note {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 25px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .license-note ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .license-note a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+        
+        .license-note a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -432,6 +504,7 @@
                         <div class="port-country">ドイツ</div>
                     </div>
                 </div>
+                <img src="img/hamburg.jpg" alt="ハンブルク港のパノラマビュー" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -464,6 +537,7 @@
                         <div class="port-country">ノルウェー</div>
                     </div>
                 </div>
+                <img src="img/tromso.jpg" alt="トロムソ港とアークティック大聖堂" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -496,6 +570,7 @@
                         <div class="port-country">スヴァールバル諸島（ノルウェー領）</div>
                     </div>
                 </div>
+                <img src="img/longyearbyen.jpg" alt="ロングイェールビーン港の極地風景" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -530,6 +605,7 @@
                         <div class="port-country">グリーンランド（デンマーク領）</div>
                     </div>
                 </div>
+                <img src="img/qaanaaq.jpg" alt="カーナーク（Qaanaaq）の衛星写真" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -562,6 +638,7 @@
                         <div class="port-country">カナダ・ヌナブト準州</div>
                     </div>
                 </div>
+                <img src="img/grise_fiord.jpg" alt="グライズフィヨルドの港湾施設" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -594,6 +671,7 @@
                         <div class="port-country">カナダ・ヌナブト準州</div>
                     </div>
                 </div>
+                <img src="img/resolute.jpg" alt="レゾリートコミュニティと港湾施設" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -626,6 +704,7 @@
                         <div class="port-country">カナダ・ヌナブト準州</div>
                     </div>
                 </div>
+                <img src="img/arctic_bay.jpg" alt="アークティックベイのベイビュー" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -657,6 +736,7 @@
                         <div class="port-country">カナダ・ヌナブト準州</div>
                     </div>
                 </div>
+                <img src="img/pond_inlet.jpg" alt="ポンドインレットのウェルカムサインと港湾" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -688,6 +768,7 @@
                         <div class="port-country">カナダ・ヌナブト準州</div>
                     </div>
                 </div>
+                <img src="img/cambridge_bay.jpg" alt="ケンブリッジベイの海岸線" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -715,11 +796,12 @@
                 <div class="port-number">10</div>
                 <div class="port-header">
                     <span class="port-flag">🇨🇦</span>
-                    <div clas-info">
+                    <div class="port-info">
                         <div class="port-name">ジョアヘイブン</div>
                         <div class="port-country">カナダ・ヌナブト準州</div>
                     </div>
                 </div>
+                <img src="img/gjoa_haven.jpg" alt="ジョアヘイブンのキングウィリアム島海岸" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -753,6 +835,7 @@
                         <div class="port-country">カナダ・北西準州</div>
                     </div>
                 </div>
+                <img src="img/tuktoyaktuk.jpg" alt="タクトヤクタックのピンゴ地形" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -785,6 +868,7 @@
                         <div class="port-country">アメリカ・アラスカ州</div>
                     </div>
                 </div>
+                <img src="img/prudhoe_bay.jpg" alt="プルドーベイの石油施設" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">🛢️</span>
@@ -817,6 +901,7 @@
                         <div class="port-country">アメリカ・アラスカ州</div>
                     </div>
                 </div>
+                <img src="img/barrow.jpg" alt="バロー（ウトキアグヴィク）の北極海海岸" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -847,6 +932,7 @@
                         <div class="port-country">アメリカ・アラスカ州</div>
                     </div>
                 </div>
+                <img src="img/point_hope.jpg" alt="ポイントホープの村の風景" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -880,6 +966,7 @@
                         <div class="port-country">アメリカ・アラスカ州</div>
                     </div>
                 </div>
+                <img src="img/nome.jpg" alt="ノームの街並み" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -914,6 +1001,7 @@
                         <div class="port-country">アメリカ・アリューシャン列島</div>
                     </div>
                 </div>
+                <img src="img/dutch_harbor.jpg" alt="ダッチハーバーの漁業港" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -946,6 +1034,7 @@
                         <div class="port-country">ロシア・カムチャツカ半島</div>
                     </div>
                 </div>
+                <img src="img/petropavlovsk.jpg" alt="ペトロパブロフスク・カムチャツキーの街並み" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -978,6 +1067,7 @@
                         <div class="port-country">日本・北海道</div>
                     </div>
                 </div>
+                <img src="img/tomakomai.jpg" alt="苫小牧港のコンテナターミナル" class="port-image">
                 <div class="port-details">
                     <div class="detail-item">
                         <span class="detail-icon">👥</span>
@@ -1069,6 +1159,63 @@
                 <strong>⚠️ ご注意</strong>
                 <p>実際の航行では、海氷状況により寄港できない港が多数あります。
                 また、多くの港は夏季のみ利用可能で、専門的な装備と許可が必要です。</p>
+            </div>
+        </div>
+        
+        <div class="license-section">
+            <h3>📷 画像ライセンス情報</h3>
+            <p>本旅行ガイドで使用されている画像は、Wikimedia Commonsの実際の写真とオリジナル作成のプレースホルダー画像を組み合わせています。</p>
+            
+            <div class="license-grid">
+                <div class="license-item">
+                    <strong>✅ Wikimedia Commons からの実際の写真</strong>
+                    <div style="margin-top: 10px;">
+                        <p><strong>バロー（ウトキアグヴィク）</strong><br>
+                        出典: Town_of_Barrow,_Alaska.jpg<br>
+                        ライセンス: パブリックドメイン (Public Domain)</p>
+                        
+                        <p><strong>ノーム</strong><br>
+                        出典: Nome_Alaska_1900.jpg<br>
+                        ライセンス: パブリックドメイン (Public Domain)<br>
+                        説明: 1900年代ゴールドラッシュ時代の写真</p>
+                        
+                        <p><strong>グライズフィヨルド</strong><br>
+                        出典: Grise_Fiord_harbour.jpg<br>
+                        ライセンス: CC BY 2.0<br>
+                        作者: ansgar.walk</p>
+                        
+                        <p><strong>ポイントホープ</strong><br>
+                        出典: FMIB_35078_Native_Man_and_Woman_from_Point_Hope_Village.jpeg<br>
+                        ライセンス: パブリックドメイン (Public Domain)</p>
+                    </div>
+                </div>
+                
+                <div class="license-item">
+                    <strong>🎨 オリジナル プレースホルダー画像</strong>
+                    <div style="margin-top: 10px;">
+                        <p><strong>以下の港（14箇所）</strong>:<br>
+                        ハンブルク、トロムソ、ロングイェールビーン、カーナーク、レゾリ、アークティックベイ、ポンドインレット、ケンブリッジベイ、ジョアヘイブン、タクトヤクタック、プルドーベイ、ダッチハーバー、ペトロパブロフスク・カムチャツキー、苫小牧港</p>
+                        
+                        <p><strong>作成方法</strong>: ImageMagick convertコマンド<br>
+                        <strong>内容</strong>: 港名と国旗絵文字<br>
+                        <strong>サイズ</strong>: 800×200 ピクセル<br>
+                        <strong>ライセンス</strong>: パブリックドメイン（完全オリジナル作成）</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="license-note">
+                <p><strong>著作権表示について：</strong></p>
+                <ul>
+                    <li><strong>CC BY 2.0</strong>: クリエイティブ・コモンズ 表示 2.0（作者名の表示が必要）</li>
+                    <li><strong>Public Domain</strong>: パブリックドメイン（著作権なし、自由使用可能）</li>
+                </ul>
+                
+                <p><strong>画像取得方法：</strong></p>
+                <p>実際の写真は <code>download_all_real_images.py</code> スクリプトを使用してWikimedia Commons APIから適切なライセンスの画像を取得しています。プレースホルダー画像と置き換えるには、スクリプトを実行してください。</p>
+                
+                <p><strong>注意事項：</strong></p>
+                <p>すべての実際の写真は教育目的での使用であり、各ライセンスの条項に従って使用しています。より多くの実際の写真や詳細情報については、各港の説明に含まれている Wikipedia リンクをご確認ください。</p>
             </div>
         </div>
         
