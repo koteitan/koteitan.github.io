@@ -1,0 +1,125 @@
+# Arctic Ports Images - License Information
+
+出典: Wikimedia Commons
+用途: 教育目的 - 北極海航路ガイド
+ダウンロード日: 2025-08-09
+
+## Hamburg
+- ローカルファイル: hamburg.jpg
+- Wikimediaファイル: Hamburg_Landungsbruecken_01.jpg
+- 説明: Hamburg port and Landungsbrücken
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/8/87/Hamburg_Landungsbruecken_01.jpg
+- ファイルサイズ: 83,177 bytes
+
+## Tromsø
+- ローカルファイル: tromso.jpg
+- Wikimediaファイル: Tromsø_in_midnightsun.JPG
+- 説明: Tromsø harbor by night
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Troms%C3%B8_in_midnightsun.JPG/960px-Troms%C3%B8_in_midnightsun.JPG
+- ファイルサイズ: 183,964 bytes
+
+## Longyearbyen
+- ローカルファイル: longyearbyen.jpg
+- Wikimediaファイル: Longyearbyen_main_street_IMG_2603.jpg
+- 説明: Longyearbyen settlement
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Longyearbyen_main_street_IMG_2603.jpg/960px-Longyearbyen_main_street_IMG_2603.jpg
+- ファイルサイズ: 155,892 bytes
+
+## Qaanaaq
+- ローカルファイル: qaanaaq.jpg
+- Wikimediaファイル: QaanaaqGreenland_(cropped).jpg
+- 説明: Qaanaaq settlement in Greenland
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/QaanaaqGreenland_%28cropped%29.jpg/960px-QaanaaqGreenland_%28cropped%29.jpg
+- ファイルサイズ: 179,440 bytes
+
+## Grise Fiord
+- ローカルファイル: grise_fiord.jpg
+- Wikimediaファイル: Grise_Fiord_harbour.jpg
+- 説明: Grise Fiord harbor facilities
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Grise_Fiord_harbour.jpg/960px-Grise_Fiord_harbour.jpg
+- ファイルサイズ: 122,210 bytes
+
+## Resolute
+- ローカルファイル: resolute.jpg
+- Wikimediaファイル: Community_of_Resolute.jpg
+- 説明: Resolute community view
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/4/48/Community_of_Resolute.jpg
+- ファイルサイズ: 48,651 bytes
+
+## Arctic Bay
+- ローカルファイル: arctic_bay.jpg
+- Wikimediaファイル: Arctic-bay.jpg
+- 説明: Arctic Bay coastal view
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/6/6d/Arctic-bay.jpg
+- ファイルサイズ: 63,718 bytes
+
+## Pond Inlet
+- ローカルファイル: pond_inlet.jpg
+- Wikimediaファイル: Welcome_to_Pond_Inlet.jpg
+- 説明: Pond Inlet welcome sign
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Welcome_to_Pond_Inlet.jpg/960px-Welcome_to_Pond_Inlet.jpg
+- ファイルサイズ: 186,167 bytes
+
+## Cambridge Bay
+- ローカルファイル: cambridge_bay.jpg
+- Wikimediaファイル: Cambridge_Bay_Shore.jpg
+- 説明: Cambridge Bay shoreline
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Cambridge_Bay_Shore.jpg/960px-Cambridge_Bay_Shore.jpg
+- ファイルサイズ: 110,878 bytes
+
+## Gjoa Haven
+- ローカルファイル: gjoa_haven.jpg
+- Wikimediaファイル: Along_the_shoreline,_Gjoa_Haven,_September_2019.jpg
+- 説明: Gjoa Haven coastal area
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Along_the_shoreline%2C_Gjoa_Haven%2C_September_2019.jpg/960px-Along_the_shoreline%2C_Gjoa_Haven%2C_September_2019.jpg
+- ファイルサイズ: 119,537 bytes
+
+## Prudhoe Bay
+- ローカルファイル: prudhoe_bay.jpg
+- Wikimediaファイル: Aerial_View_of_Prudhoe_Bay.jpg
+- 説明: Prudhoe Bay oil facilities
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Aerial_View_of_Prudhoe_Bay.jpg/960px-Aerial_View_of_Prudhoe_Bay.jpg
+- ファイルサイズ: 135,610 bytes
+
+## Barrow/Utqiagvik
+- ローカルファイル: barrow.jpg
+- Wikimediaファイル: Town_of_Barrow,_Alaska.jpg
+- 説明: Town of Barrow, Alaska
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Town_of_Barrow%2C_Alaska.jpg/960px-Town_of_Barrow%2C_Alaska.jpg
+- ファイルサイズ: 89,094 bytes
+
+## Point Hope
+- ローカルファイル: point_hope.jpg
+- Wikimediaファイル: Village_of_point_hope.jpg
+- 説明: Point Hope village view
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Village_of_point_hope.jpg/960px-Village_of_point_hope.jpg
+- ファイルサイズ: 211,109 bytes
+
+## Nome
+- ローカルファイル: nome.jpg
+- Wikimediaファイル: Nome_Alaska_1900.jpg
+- 説明: Nome during Gold Rush era
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nome_Alaska_1900.jpg/960px-Nome_Alaska_1900.jpg
+- ファイルサイズ: 121,751 bytes
+
+## Dutch Harbor
+- ローカルファイル: dutch_harbor.jpg
+- Wikimediaファイル: Dutch_Harbor,_Alaska.jpg
+- 説明: Dutch Harbor fishing port
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Dutch_Harbor%2C_Alaska.jpg/960px-Dutch_Harbor%2C_Alaska.jpg
+- ファイルサイズ: 223,654 bytes
+
+## Petropavlovsk-Kamchatsky
+- ローカルファイル: petropavlovsk.jpg
+- Wikimediaファイル: Koryaksky_volcano_Petropavlovsk-Kamchatsky_oct-2005.jpg
+- 説明: Petropavlovsk-Kamchatsky cityscape
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Koryaksky_volcano_Petropavlovsk-Kamchatsky_oct-2005.jpg/960px-Koryaksky_volcano_Petropavlovsk-Kamchatsky_oct-2005.jpg
+- ファイルサイズ: 219,517 bytes
+
+## Tomakomai
+- ローカルファイル: tomakomai.jpg
+- Wikimediaファイル: Port_of_Tomakomai.jpg
+- 説明: Port of Tomakomai facilities
+- ダウンロードURL: https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Port_of_Tomakomai.jpg/960px-Port_of_Tomakomai.jpg
+- ファイルサイズ: 117,607 bytes
+

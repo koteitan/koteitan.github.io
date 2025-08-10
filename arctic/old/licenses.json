@@ -1,0 +1,144 @@
+{
+  "info": "Arctic Ports Images - License Information",
+  "source": "Wikimedia Commons",
+  "download_date": "2025-08-09",
+  "usage": "Educational purposes - Arctic route documentation",
+  "images": [
+    {
+      "port": "Hamburg",
+      "local_file": "hamburg.jpg",
+      "wikimedia_file": "Hamburg_Landungsbruecken_01.jpg",
+      "description": "Hamburg port and Landungsbrücken",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Hamburg_Landungsbruecken_01.jpg",
+      "size_bytes": 83177
+    },
+    {
+      "port": "Tromsø",
+      "local_file": "tromso.jpg",
+      "wikimedia_file": "Tromsø_in_midnightsun.JPG",
+      "description": "Tromsø harbor by night",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Troms%C3%B8_in_midnightsun.JPG/960px-Troms%C3%B8_in_midnightsun.JPG",
+      "size_bytes": 183964
+    },
+    {
+      "port": "Longyearbyen",
+      "local_file": "longyearbyen.jpg",
+      "wikimedia_file": "Longyearbyen_main_street_IMG_2603.jpg",
+      "description": "Longyearbyen settlement",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Longyearbyen_main_street_IMG_2603.jpg/960px-Longyearbyen_main_street_IMG_2603.jpg",
+      "size_bytes": 155892
+    },
+    {
+      "port": "Qaanaaq",
+      "local_file": "qaanaaq.jpg",
+      "wikimedia_file": "QaanaaqGreenland_(cropped).jpg",
+      "description": "Qaanaaq settlement in Greenland",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/QaanaaqGreenland_%28cropped%29.jpg/960px-QaanaaqGreenland_%28cropped%29.jpg",
+      "size_bytes": 179440
+    },
+    {
+      "port": "Grise Fiord",
+      "local_file": "grise_fiord.jpg",
+      "wikimedia_file": "Grise_Fiord_harbour.jpg",
+      "description": "Grise Fiord harbor facilities",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Grise_Fiord_harbour.jpg/960px-Grise_Fiord_harbour.jpg",
+      "size_bytes": 122210
+    },
+    {
+      "port": "Resolute",
+      "local_file": "resolute.jpg",
+      "wikimedia_file": "Community_of_Resolute.jpg",
+      "description": "Resolute community view",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Community_of_Resolute.jpg",
+      "size_bytes": 48651
+    },
+    {
+      "port": "Arctic Bay",
+      "local_file": "arctic_bay.jpg",
+      "wikimedia_file": "Arctic-bay.jpg",
+      "description": "Arctic Bay coastal view",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Arctic-bay.jpg",
+      "size_bytes": 63718
+    },
+    {
+      "port": "Pond Inlet",
+      "local_file": "pond_inlet.jpg",
+      "wikimedia_file": "Welcome_to_Pond_Inlet.jpg",
+      "description": "Pond Inlet welcome sign",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Welcome_to_Pond_Inlet.jpg/960px-Welcome_to_Pond_Inlet.jpg",
+      "size_bytes": 186167
+    },
+    {
+      "port": "Cambridge Bay",
+      "local_file": "cambridge_bay.jpg",
+      "wikimedia_file": "Cambridge_Bay_Shore.jpg",
+      "description": "Cambridge Bay shoreline",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Cambridge_Bay_Shore.jpg/960px-Cambridge_Bay_Shore.jpg",
+      "size_bytes": 110878
+    },
+    {
+      "port": "Gjoa Haven",
+      "local_file": "gjoa_haven.jpg",
+      "wikimedia_file": "Along_the_shoreline,_Gjoa_Haven,_September_2019.jpg",
+      "description": "Gjoa Haven coastal area",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Along_the_shoreline%2C_Gjoa_Haven%2C_September_2019.jpg/960px-Along_the_shoreline%2C_Gjoa_Haven%2C_September_2019.jpg",
+      "size_bytes": 119537
+    },
+    {
+      "port": "Prudhoe Bay",
+      "local_file": "prudhoe_bay.jpg",
+      "wikimedia_file": "Aerial_View_of_Prudhoe_Bay.jpg",
+      "description": "Prudhoe Bay oil facilities",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Aerial_View_of_Prudhoe_Bay.jpg/960px-Aerial_View_of_Prudhoe_Bay.jpg",
+      "size_bytes": 135610
+    },
+    {
+      "port": "Barrow/Utqiagvik",
+      "local_file": "barrow.jpg",
+      "wikimedia_file": "Town_of_Barrow,_Alaska.jpg",
+      "description": "Town of Barrow, Alaska",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Town_of_Barrow%2C_Alaska.jpg/960px-Town_of_Barrow%2C_Alaska.jpg",
+      "size_bytes": 89094
+    },
+    {
+      "port": "Point Hope",
+      "local_file": "point_hope.jpg",
+      "wikimedia_file": "Village_of_point_hope.jpg",
+      "description": "Point Hope village view",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Village_of_point_hope.jpg/960px-Village_of_point_hope.jpg",
+      "size_bytes": 211109
+    },
+    {
+      "port": "Nome",
+      "local_file": "nome.jpg",
+      "wikimedia_file": "Nome_Alaska_1900.jpg",
+      "description": "Nome during Gold Rush era",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nome_Alaska_1900.jpg/960px-Nome_Alaska_1900.jpg",
+      "size_bytes": 121751
+    },
+    {
+      "port": "Dutch Harbor",
+      "local_file": "dutch_harbor.jpg",
+      "wikimedia_file": "Dutch_Harbor,_Alaska.jpg",
+      "description": "Dutch Harbor fishing port",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Dutch_Harbor%2C_Alaska.jpg/960px-Dutch_Harbor%2C_Alaska.jpg",
+      "size_bytes": 223654
+    },
+    {
+      "port": "Petropavlovsk-Kamchatsky",
+      "local_file": "petropavlovsk.jpg",
+      "wikimedia_file": "Koryaksky_volcano_Petropavlovsk-Kamchatsky_oct-2005.jpg",
+      "description": "Petropavlovsk-Kamchatsky cityscape",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Koryaksky_volcano_Petropavlovsk-Kamchatsky_oct-2005.jpg/960px-Koryaksky_volcano_Petropavlovsk-Kamchatsky_oct-2005.jpg",
+      "size_bytes": 219517
+    },
+    {
+      "port": "Tomakomai",
+      "local_file": "tomakomai.jpg",
+      "wikimedia_file": "Port_of_Tomakomai.jpg",
+      "description": "Port of Tomakomai facilities",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Port_of_Tomakomai.jpg/960px-Port_of_Tomakomai.jpg",
+      "size_bytes": 117607
+    }
+  ]
+}
