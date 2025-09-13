@@ -2,26 +2,16 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>指定形状スライディングパズル</title>
+<title>スワイプ追従スライディングパズル</title>
 <style>
-  body,html {
-    margin:0; padding:0;
-    background:#f0f2f5;
-    overflow:hidden;
-    touch-action:none; /* ページスクロール禁止 */
-  }
-  canvas {
-    display:block;
-    margin:auto;
-    background:#fff;
-    touch-action:none;
-  }
+  body,html{margin:0;padding:0;overflow:hidden;background:#f0f2f5;touch-action:none;}
+  canvas{display:block;margin:auto;background:#fff;touch-action:none;}
 </style>
 </head>
 <body>
 <canvas id="puzzle" width="600" height="600"></canvas>
 <script>
-const mapData = [
+const mapData=[
 "111111111111",
 "1a111b111c11",
 "1a111b111c11",
@@ -34,135 +24,83 @@ const mapData = [
 "101110111011",
 "111111111111"
 ];
+const rows=mapData.length, cols=mapData[0].length;
+const canvas=document.getElementById("puzzle"), ctx=canvas.getContext("2d");
+const cellSize=Math.floor(canvas.width/cols);
 
-const rows = mapData.length;
-const cols = mapData[0].length;
-const canvas = document.getElementById("puzzle");
-const ctx = canvas.getContext("2d");
-const cellSize = Math.floor(canvas.width/cols);
+const colors={a:"#e74c3c",b:"#e74c3c",c:"#e74c3c",d:"#00bcd4",e:"#00bcd4",f:"#00bcd4",g:"#00bcd4"};
 
-// 色指定
-const colors = {
-  a:"#e74c3c", b:"#e74c3c", c:"#e74c3c", // 赤
-  d:"#00bcd4", e:"#00bcd4", f:"#00bcd4", g:"#00bcd4" // シアン
-};
-
-let walls = [];
-let pieces = {}; // {id:{cells:[{x,y}], color}}
-
+let walls=[],pieces={};
 for(let y=0;y<rows;y++){
   for(let x=0;x<cols;x++){
-    const ch = mapData[y][x];
-    if(ch==="1"){
-      walls.push({x,y});
-    }else if(ch==="0"){
-      // 空白 → 何もしない
-    }else{
-      if(!pieces[ch]){
-        pieces[ch] = {id:ch,cells:[],color:colors[ch]||"#555"};
-      }
+    const ch=mapData[y][x];
+    if(ch==="1") walls.push({x,y});
+    else if(ch!=="0"){
+      if(!pieces[ch]) pieces[ch]={id:ch,cells:[],color:colors[ch]};
       pieces[ch].cells.push({x,y});
     }
   }
 }
 
-function draw(){
+function draw(tempPiece=null){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  // walls
-  ctx.fillStyle="#444";
-  walls.forEach(w=>{
-    ctx.fillRect(w.x*cellSize, w.y*cellSize, cellSize, cellSize);
-  });
-  // background for others
+  // 背景
   ctx.fillStyle="#eee";
-  for(let y=0;y<rows;y++){
-    for(let x=0;x<cols;x++){
-      if(mapData[y][x]==="0"){
-        ctx.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
-      }
-    }
-  }
-  // pieces
+  for(let y=0;y<rows;y++)for(let x=0;x<cols;x++) if(mapData[y][x]==="0") ctx.fillRect(x*cellSize,y*cellSize,cellSize,cellSize);
+  // 壁
+  ctx.fillStyle="#444";
+  walls.forEach(w=>ctx.fillRect(w.x*cellSize,w.y*cellSize,cellSize,cellSize));
+  // ピース
   for(const k in pieces){
-    const p=pieces[k];
-    ctx.fillStyle=p.color;
-    p.cells.forEach(c=>{
-      ctx.fillRect(c.x*cellSize+2, c.y*cellSize+2, cellSize-4, cellSize-4);
-    });
+    if(tempPiece && tempPiece.id===k) continue; // 一時移動中のは後で描く
+    ctx.fillStyle=pieces[k].color;
+    pieces[k].cells.forEach(c=>ctx.fillRect(c.x*cellSize+2,c.y*cellSize+2,cellSize-4,cellSize-4));
   }
-}
-
-function occupiedMap(ignoreId=null){
-  const occ = Array.from({length:rows},()=>Array(cols).fill(null));
-  walls.forEach(w=>occ[w.y][w.x]="wall");
-  for(const k in pieces){
-    if(k===ignoreId) continue;
-    pieces[k].cells.forEach(c=>occ[c.y][c.x]=k);
-  }
-  return occ;
-}
-
-function canMove(pieceId, dx, dy){
-  const occ = occupiedMap(pieceId);
-  const pcs = pieces[pieceId].cells;
-  for(const c of pcs){
-    const nx=c.x+dx, ny=c.y+dy;
-    if(nx<0||nx>=cols||ny<0||ny>=rows) return false;
-    if(occ[ny][nx]!=null) return false;
-  }
-  return true;
-}
-
-function movePiece(pieceId, dx, dy, steps=1){
-  for(let s=0;s<steps;s++){
-    if(canMove(pieceId,dx,dy)){
-      pieces[pieceId].cells.forEach(c=>{c.x+=dx;c.y+=dy;});
-    }else break;
+  if(tempPiece){
+    ctx.fillStyle=tempPiece.color;
+    tempPiece.cells.forEach(c=>ctx.fillRect(c.x*cellSize+2,c.y*cellSize+2,cellSize-4,cellSize-4));
   }
 }
 
 function pieceAt(x,y){
   for(const k in pieces){
     for(const c of pieces[k].cells){
-      if(c.x===x && c.y===y) return pieces[k];
+      if(c.x===x&&c.y===y) return pieces[k];
     }
   }
   return null;
 }
 
-// swipe detection
-let startX=null, startY=null, swipedPiece=null;
+let dragging=null,dragStartPos=null,pieceStartCells=null;
+
 canvas.addEventListener("touchstart",e=>{
-  const t=e.touches[0];
-  const rect=canvas.getBoundingClientRect();
+  const t=e.touches[0],rect=canvas.getBoundingClientRect();
   const cx=Math.floor((t.clientX-rect.left)/cellSize);
   const cy=Math.floor((t.clientY-rect.top)/cellSize);
-  swipedPiece=pieceAt(cx,cy);
-  startX=t.clientX;
-  startY=t.clientY;
+  const p=pieceAt(cx,cy);
+  if(p){dragging=p;pieceStartCells=JSON.parse(JSON.stringify(p.cells));dragStartPos={x:t.clientX,y:t.clientY};}
+  e.preventDefault();
+},{passive:false});
+
+canvas.addEventListener("touchmove",e=>{
+  if(!dragging) return;
+  const t=e.touches[0];
+  const dx=(t.clientX-dragStartPos.x)/cellSize;
+  const dy=(t.clientY-dragStartPos.y)/cellSize;
+  // ピースの開始位置にオフセットを加算
+  const temp={id:dragging.id,color:dragging.color,cells:pieceStartCells.map(c=>({x:c.x+dx,y:c.y+dy}))};
+  draw(temp);
   e.preventDefault();
 },{passive:false});
 
 canvas.addEventListener("touchend",e=>{
-  if(!swipedPiece) return;
-  const dx=e.changedTouches[0].clientX-startX;
-  const dy=e.changedTouches[0].clientY-startY;
-  let dirX=0, dirY=0;
-  if(Math.abs(dx)>Math.abs(dy)){
-    dirX=dx>20?1:(dx<-20?-1:0);
-  }else{
-    dirY=dy>20?1:(dy<-20?-1:0);
-  }
-  if(dirX!==0||dirY!==0){
-    // 最大限動かす
-    let steps=0;
-    while(canMove(swipedPiece.id,dirX,dirY)){
-      movePiece(swipedPiece.id,dirX,dirY);
-      steps++;
-    }
-  }
-  swipedPiece=null;
-  draw();
+  if(!dragging) return;
+  const t=e.changedTouches[0];
+  const dx=(t.clientX-dragStartPos.x)/cellSize;
+  const dy=(t.clientY-dragStartPos.y)/cellSize;
+  // 四捨五入で最終位置確定
+  dragging.cells=pieceStartCells.map(c=>({x:Math.round(c.x+dx),y:Math.round(c.y+dy)}));
+  dragging=null; pieceStartCells=null; draw();
   e.preventDefault();
 },{passive:false});
 
