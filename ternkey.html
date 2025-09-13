@@ -2,361 +2,158 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>T形＋長方形 スライディングパズル</title>
+<title>指定形状スライディングパズル</title>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:18px;background:#f6f7fb;color:#111}
-  canvas{background:#fff;border:1px solid #cdd7ec;border-radius:8px;display:block}
-  .controls{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-  button,input{padding:6px 8px;border-radius:6px;border:1px solid #bfc9e0;background:#fff}
-  #hint{color:#333;font-size:13px;margin-left:12px}
+  body,html {
+    margin:0; padding:0; background:#f0f2f5;
+    overflow:hidden; /* ページスクロール禁止 */
+    touch-action:none; /* スワイプでスクロールさせない */
+  }
+  canvas {
+    display:block;
+    margin:auto;
+    background:#fff;
+    touch-action:none;
+  }
 </style>
 </head>
 <body>
-<div class="controls">
-  <label>グリッド
-    <input id="gridSize" type="number" min="4" max="8" value="5" style="width:60px;margin-left:6px">
-  </label>
-  <button id="apply">反映</button>
-  <button id="scramble">スクランブル</button>
-  <button id="reset">リセット</button>
-  <div id="hint">クリックで選択 → 同じ行/列の空セルをクリックしてスライド</div>
-</div>
-<canvas id="c" width="600" height="600"></canvas>
-
+<canvas id="puzzle" width="600" height="600"></canvas>
 <script>
-(() => {
-  const canvas = document.getElementById('c');
-  const ctx = canvas.getContext('2d');
-  const gridInput = document.getElementById('gridSize');
-  const applyBtn = document.getElementById('apply');
-  const scrambleBtn = document.getElementById('scramble');
-  const resetBtn = document.getElementById('reset');
+const mapData = [
+"11111111111",
+"1a111b111c11",
+"1a111b000c11",
+"1aa11bb11cc11",
+"1adddbeeec01",
+"1a011b011c01",
+"10fff0ggg00",
+"100110011001",
+"101110111011",
+"101110111011",
+"111111111111"
+];
 
-  let cols = parseInt(gridInput.value,10);
-  let rows = cols;
-  let cellPx = Math.floor(Math.min(canvas.width, canvas.height) / cols);
-  let pieces = [];
-  let selected = null;
-  let animating = false;
+const rows = mapData.length;
+const cols = mapData[0].length;
+const canvas = document.getElementById("puzzle");
+const ctx = canvas.getContext("2d");
+const cellSize = Math.floor(canvas.width/cols);
 
-  // piece: {id, mask:[{x,y}], origin:{x,y}, color}
-  // T-shape mask (┬) : [(0,0),(1,0),(2,0),(1,1)] footprint width=3,height=2
-  // rectangular masks: horizontal [ (0,0),(1,0) ] or vertical [ (0,0),(0,1) ] or single [(0,0)]
-  function makeInitialPieces(g){
-    // simple layout for 5x5-ish board. If grid different, scale positions to fit.
-    const N = g;
-    const p = [];
-    // place one T near top-left
-    p.push({
-      id: 'T1',
-      mask: [{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:1,y:1}],
-      origin: {x:0,y:0},
-      color: '#e03b3b'
-    });
-    // top-right horizontal 2
-    p.push({
-      id: 'H1',
-      mask: [{x:0,y:0},{x:1,y:0}],
-      origin: {x: N-2, y:0},
-      color: '#0b76d1'
-    });
-    // left vertical 2
-    p.push({
-      id: 'V1',
-      mask: [{x:0,y:0},{x:0,y:1}],
-      origin: {x:0,y:2},
-      color: '#111'
-    });
-    // center T
-    p.push({
-      id: 'T2',
-      mask: [{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:1,y:1}],
-      origin: {x: Math.max(1, N-3), y: 2},
-      color: '#d94d00'
-    });
-    // small horizontal and squares to fill
-    p.push({ id:'H2', mask:[{x:0,y:0},{x:1,y:0}], origin:{x:1,y:3}, color:'#19a25a' });
-    p.push({ id:'S1', mask:[{x:0,y:0}], origin:{x:N-1,y:3}, color:'#6ab0ff' });
-    p.push({ id:'H3', mask:[{x:0,y:0},{x:1,y:0}], origin:{x:1,y:4}, color:'#6a2b8f' });
-    // if grid larger than 5, add some filler pieces scattered
-    if(N >= 6){
-      p.push({ id:'V2', mask:[{x:0,y:0},{x:0,y:1}], origin:{x: N-3, y: 0}, color:'#ffb11f' });
-      p.push({ id:'S2', mask:[{x:0,y:0}], origin:{x: N-2, y: 4}, color:'#3b3b3b' });
-    }
-    return p;
-  }
+const colors = {
+  a:"#e74c3c", b:"#3498db", c:"#9b59b6",
+  d:"#f39c12", e:"#1abc9c", f:"#2ecc71",
+  g:"#e67e22"
+};
 
-  function reset(n){
-    cols = n; rows = n;
-    cellPx = Math.floor(Math.min(canvas.width, canvas.height) / cols);
-    pieces = makeInitialPieces(cols);
-    selected = null;
-    animating = false;
-    draw();
-  }
+let walls = [];
+let emptyCells = [];
+let pieces = {}; // {id: {cells:[{x,y}], color}}
 
-  function cellsOccupiedByPiece(piece, originOverride){
-    const ox = (originOverride?originOverride.x:piece.origin.x);
-    const oy = (originOverride?originOverride.y:piece.origin.y);
-    return piece.mask.map(m => ({x: ox + m.x, y: oy + m.y}));
-  }
-
-  function buildOccupancyMap(ignorePieceId){
-    const map = Array.from({length:rows}, ()=>Array(cols).fill(null));
-    for(const p of pieces){
-      if(p.id === ignorePieceId) continue;
-      const cells = cellsOccupiedByPiece(p);
-      for(const c of cells){
-        if(c.y>=0 && c.y<rows && c.x>=0 && c.x<cols) map[c.y][c.x] = p.id;
+for(let y=0;y<rows;y++){
+  for(let x=0;x<cols;x++){
+    const ch = mapData[y][x];
+    if(ch==="1"){
+      walls.push({x,y});
+    }else if(ch==="0"){
+      emptyCells.push({x,y});
+    }else{
+      if(!pieces[ch]){
+        pieces[ch] = {id:ch,cells:[],color:colors[ch]||"#555"};
       }
-    }
-    return map;
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    // grid
-    ctx.strokeStyle = '#d7dfef';
-    for(let i=0;i<=cols;i++){
-      ctx.beginPath();
-      ctx.moveTo(i*cellPx+0.5,0.5);
-      ctx.lineTo(i*cellPx+0.5, rows*cellPx+0.5);
-      ctx.stroke();
-    }
-    for(let j=0;j<=rows;j++){
-      ctx.beginPath();
-      ctx.moveTo(0.5, j*cellPx+0.5);
-      ctx.lineTo(cols*cellPx+0.5, j*cellPx+0.5);
-      ctx.stroke();
-    }
-    // pieces (draw in order)
-    for(const p of pieces){
-      drawPiece(p);
-    }
-    // selection highlight
-    if(selected){
-      const bbox = pieceBBox(selected);
-      ctx.strokeStyle = '#ff9900';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(bbox.x*cellPx+4, bbox.y*cellPx+4, bbox.w*cellPx-8, bbox.h*cellPx-8);
-      ctx.lineWidth = 1;
+      pieces[ch].cells.push({x,y});
     }
   }
+}
 
-  function pieceBBox(piece, originOverride){
-    const cells = cellsOccupiedByPiece(piece, originOverride);
-    const xs = cells.map(c=>c.x), ys = cells.map(c=>c.y);
-    const minX = Math.min(...xs), maxX = Math.max(...xs);
-    const minY = Math.min(...ys), maxY = Math.max(...ys);
-    return { x: minX, y: minY, w: maxX-minX+1, h: maxY-minY+1 };
-  }
-
-  function drawPiece(p){
-    // draw each occupied cell as a rounded rect and connect visually
-    const cells = cellsOccupiedByPiece(p);
-    // compute bounding box for smooth shape base
-    const bb = pieceBBox(p);
-    // draw each cell
-    for(const c of cells){
-      const x = c.x * cellPx + 2;
-      const y = c.y * cellPx + 2;
-      const w = cellPx - 4;
-      const h = cellPx - 4;
-      roundRect(ctx, x, y, w, h, 8);
-      ctx.fillStyle = p.color;
-      ctx.fill();
-    }
-    // label
-    ctx.fillStyle = '#fff';
-    ctx.font = Math.floor(cellPx*0.4) + 'px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    // compute center
-    const centerX = (bb.x + bb.w/2) * cellPx;
-    const centerY = (bb.y + bb.h/2) * cellPx;
-    ctx.fillText(p.id.replace(/[0-9]/g,''), centerX, centerY);
-    // subtle border
-    ctx.strokeStyle = 'rgba(0,0,0,0.12)';
-    ctx.stroke();
-  }
-
-  function roundRect(ctx,x,y,w,h,r){
-    ctx.beginPath();
-    ctx.moveTo(x+r,y);
-    ctx.arcTo(x+w,y,x+w,y+h,r);
-    ctx.arcTo(x+w,y+h,x,y+h,r);
-    ctx.arcTo(x,y+h,x,y,r);
-    ctx.arcTo(x,y,x+w,y,r);
-    ctx.closePath();
-  }
-
-  // return piece under cell or null
-  function pieceAtCell(cx, cy){
-    for(const p of pieces){
-      const cells = cellsOccupiedByPiece(p);
-      for(const c of cells){
-        if(c.x === cx && c.y === cy) return p;
-      }
-    }
-    return null;
-  }
-
-  // Determine if piece can move by dx,dy (integer steps)
-  function canMoveBy(piece, dx, dy){
-    const newOrigin = { x: piece.origin.x + dx, y: piece.origin.y + dy };
-    // bounds check
-    for(const m of piece.mask){
-      const nx = newOrigin.x + m.x, ny = newOrigin.y + m.y;
-      if(nx < 0 || nx >= cols || ny < 0 || ny >= rows) return false;
-    }
-    const occ = buildOccupancyMap(piece.id);
-    for(const m of piece.mask){
-      const nx = newOrigin.x + m.x, ny = newOrigin.y + m.y;
-      if(occ[ny][nx] !== null) return false;
-    }
-    return true;
-  }
-
-  // Try move piece along direction by steps (positive int) with animation
-  function movePieceBy(piece, dx, dy, steps){
-    if(animating) return;
-    // check each intermediate step allowed
-    const stepX = Math.sign(dx || dy) * (dx? Math.sign(dx):0);
-    const sx = dx? Math.sign(dx):0;
-    const sy = dy? Math.sign(dy):0;
-    for(let s=1;s<=steps;s++){
-      if(!canMoveBy(piece, sx*s, sy*s)) return false;
-    }
-    // animate
-    animating = true;
-    const totalFrames = 12 * steps;
-    let frame = 0;
-    const startOrigin = {x: piece.origin.x, y: piece.origin.y};
-    function animate(){
-      frame++;
-      const t = Math.min(1, frame/totalFrames);
-      const curX = startOrigin.x + (dx * (t));
-      const curY = startOrigin.y + (dy * (t));
-      // temporary origin override while drawing
-      draw(); // base draw
-      // draw moving piece last at fractional position
-      const px = curX * cellPx + 2;
-      const py = curY * cellPx + 2;
-      // draw piece at fractional pos by drawing its cells offset
-      ctx.save();
-      ctx.translate((curX - Math.floor(curX)) * cellPx, (curY - Math.floor(curY)) * cellPx);
-      // draw piece normally using integer origin for mask (we offset already)
-      const backupOrigin = {...piece.origin};
-      piece.origin = {x: Math.floor(curX), y: Math.floor(curY)};
-      drawPiece(piece);
-      piece.origin = backupOrigin;
-      ctx.restore();
-      if(frame < totalFrames) requestAnimationFrame(animate);
-      else {
-        piece.origin.x = startOrigin.x + dx;
-        piece.origin.y = startOrigin.y + dy;
-        animating = false;
-        draw();
-      }
-    }
-    requestAnimationFrame(animate);
-    return true;
-  }
-
-  // Handle clicks
-  canvas.addEventListener('click', (ev) => {
-    if(animating) return;
-    const rect = canvas.getBoundingClientRect();
-    const mx = ev.clientX - rect.left;
-    const my = ev.clientY - rect.top;
-    const cx = Math.floor(mx / cellPx);
-    const cy = Math.floor(my / cellPx);
-    if(cx < 0 || cx >= cols || cy < 0 || cy >= rows) return;
-
-    const clickedPiece = pieceAtCell(cx, cy);
-    if(clickedPiece){
-      // select clicked piece
-      selected = clickedPiece;
-      draw();
-      return;
-    }
-    // clicked empty cell
-    if(!selected) return;
-    // determine movement direction
-    const bbox = pieceBBox(selected);
-    // if clicked cell lies in same row as any occupied cell -> horizontal attempt
-    const rowsSet = new Set(cellsOccupiedByPiece(selected).map(c=>c.y));
-    const colsSet = new Set(cellsOccupiedByPiece(selected).map(c=>c.x));
-    if(rowsSet.has(cy) && (cx < bbox.x || cx > (bbox.x + bbox.w - 1))){
-      // horizontal move
-      let steps = 0;
-      if(cx < bbox.x) steps = bbox.x - cx;
-      else steps = cx - (bbox.x + bbox.w - 1);
-      const dir = (cx < bbox.x) ? -1 : 1;
-      // attempt maximal steps but stop if blocked earlier
-      for(let s = steps; s>=1; s--){
-        if(canMoveBy(selected, dir*s, 0)){
-          movePieceBy(selected, dir*s, 0, s);
-          return;
-        }
-      }
-      return;
-    }
-    if(colsSet.has(cx) && (cy < bbox.y || cy > (bbox.y + bbox.h -1))){
-      // vertical move
-      let steps = 0;
-      if(cy < bbox.y) steps = bbox.y - cy;
-      else steps = cy - (bbox.y + bbox.h - 1);
-      const dir = (cy < bbox.y) ? -1 : 1;
-      for(let s = steps; s>=1; s--){
-        if(canMoveBy(selected, 0, dir*s)){
-          movePieceBy(selected, 0, dir*s, s);
-          return;
-        }
-      }
-      return;
-    }
-    // else ignore click
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // walls
+  ctx.fillStyle="#444";
+  walls.forEach(w=>{
+    ctx.fillRect(w.x*cellSize, w.y*cellSize, cellSize, cellSize);
   });
-
-  // scramble by applying random valid single-step moves many times
-  function scrambleTimes(k){
-    let tries=0;
-    while(k>0 && tries<k*20){
-      const p = pieces[Math.floor(Math.random()*pieces.length)];
-      // choose random direction and steps 1..3
-      const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
-      const d = dirs[Math.floor(Math.random()*dirs.length)];
-      const maxSteps = 3;
-      const steps = 1 + Math.floor(Math.random()*maxSteps);
-      if(canMoveBy(p, d[0]*steps, d[1]*steps)){
-        p.origin.x += d[0]*steps;
-        p.origin.y += d[1]*steps;
-        k--;
-      }
-      tries++;
-    }
-    draw();
+  // empty
+  ctx.fillStyle="#eee";
+  emptyCells.forEach(c=>{
+    ctx.fillRect(c.x*cellSize, c.y*cellSize, cellSize, cellSize);
+  });
+  // pieces
+  for(const k in pieces){
+    const p=pieces[k];
+    ctx.fillStyle=p.color;
+    p.cells.forEach(c=>{
+      ctx.fillRect(c.x*cellSize+2, c.y*cellSize+2, cellSize-4, cellSize-4);
+    });
   }
+}
 
-  applyBtn.addEventListener('click', ()=> {
-    const v = Math.max(4, Math.min(8, parseInt(gridInput.value,10)||5));
-    gridInput.value = v;
-    reset(v);
-  });
+function occupiedMap(ignoreId=null){
+  const occ = Array.from({length:rows},()=>Array(cols).fill(null));
+  walls.forEach(w=>occ[w.y][w.x]="wall");
+  for(const k in pieces){
+    if(k===ignoreId) continue;
+    pieces[k].cells.forEach(c=>occ[c.y][c.x]=k);
+  }
+  return occ;
+}
 
-  scrambleBtn.addEventListener('click', ()=> {
-    scrambleTimes(200);
-    selected = null;
-  });
+function canMove(pieceId, dx, dy){
+  const occ = occupiedMap(pieceId);
+  const pcs = pieces[pieceId].cells;
+  for(const c of pcs){
+    const nx=c.x+dx, ny=c.y+dy;
+    if(nx<0||nx>=cols||ny<0||ny>=rows) return false;
+    if(occ[ny][nx]!=null) return false;
+  }
+  return true;
+}
 
-  resetBtn.addEventListener('click', ()=> {
-    reset(parseInt(gridInput.value,10) || 5);
-  });
+function movePiece(pieceId, dx, dy){
+  if(!canMove(pieceId,dx,dy)) return false;
+  pieces[pieceId].cells.forEach(c=>{c.x+=dx;c.y+=dy;});
+  return true;
+}
 
-  // init
-  reset(cols);
-})();
+function pieceAt(x,y){
+  for(const k in pieces){
+    for(const c of pieces[k].cells){
+      if(c.x===x && c.y===y) return pieces[k];
+    }
+  }
+  return null;
+}
+
+// swipe detection
+let startX=null, startY=null, swipedPiece=null;
+canvas.addEventListener("touchstart",e=>{
+  const t=e.touches[0];
+  const rect=canvas.getBoundingClientRect();
+  const cx=Math.floor((t.clientX-rect.left)/cellSize);
+  const cy=Math.floor((t.clientY-rect.top)/cellSize);
+  swipedPiece=pieceAt(cx,cy);
+  startX=t.clientX;
+  startY=t.clientY;
+  e.preventDefault();
+},{passive:false});
+
+canvas.addEventListener("touchend",e=>{
+  if(!swipedPiece) return;
+  const dx=e.changedTouches[0].clientX-startX;
+  const dy=e.changedTouches[0].clientY-startY;
+  if(Math.abs(dx)>Math.abs(dy)){
+    if(dx>20) movePiece(swipedPiece.id,1,0);
+    if(dx<-20) movePiece(swipedPiece.id,-1,0);
+  }else{
+    if(dy>20) movePiece(swipedPiece.id,0,1);
+    if(dy<-20) movePiece(swipedPiece.id,0,-1);
+  }
+  swipedPiece=null;
+  draw();
+  e.preventDefault();
+},{passive:false});
+
+draw();
 </script>
 </body>
 </html>
