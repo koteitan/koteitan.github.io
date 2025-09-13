@@ -5,9 +5,10 @@
 <title>指定形状スライディングパズル</title>
 <style>
   body,html {
-    margin:0; padding:0; background:#f0f2f5;
-    overflow:hidden; /* ページスクロール禁止 */
-    touch-action:none; /* スワイプでスクロールさせない */
+    margin:0; padding:0;
+    background:#f0f2f5;
+    overflow:hidden;
+    touch-action:none; /* ページスクロール禁止 */
   }
   canvas {
     display:block;
@@ -40,15 +41,14 @@ const canvas = document.getElementById("puzzle");
 const ctx = canvas.getContext("2d");
 const cellSize = Math.floor(canvas.width/cols);
 
+// 色指定
 const colors = {
-  a:"#e74c3c", b:"#3498db", c:"#9b59b6",
-  d:"#f39c12", e:"#1abc9c", f:"#2ecc71",
-  g:"#e67e22"
+  a:"#e74c3c", b:"#e74c3c", c:"#e74c3c", // 赤
+  d:"#00bcd4", e:"#00bcd4", f:"#00bcd4", g:"#00bcd4" // シアン
 };
 
 let walls = [];
-let emptyCells = [];
-let pieces = {}; // {id: {cells:[{x,y}], color}}
+let pieces = {}; // {id:{cells:[{x,y}], color}}
 
 for(let y=0;y<rows;y++){
   for(let x=0;x<cols;x++){
@@ -56,7 +56,7 @@ for(let y=0;y<rows;y++){
     if(ch==="1"){
       walls.push({x,y});
     }else if(ch==="0"){
-      emptyCells.push({x,y});
+      // 空白 → 何もしない
     }else{
       if(!pieces[ch]){
         pieces[ch] = {id:ch,cells:[],color:colors[ch]||"#555"};
@@ -73,11 +73,15 @@ function draw(){
   walls.forEach(w=>{
     ctx.fillRect(w.x*cellSize, w.y*cellSize, cellSize, cellSize);
   });
-  // empty
+  // background for others
   ctx.fillStyle="#eee";
-  emptyCells.forEach(c=>{
-    ctx.fillRect(c.x*cellSize, c.y*cellSize, cellSize, cellSize);
-  });
+  for(let y=0;y<rows;y++){
+    for(let x=0;x<cols;x++){
+      if(mapData[y][x]==="0"){
+        ctx.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
+      }
+    }
+  }
   // pieces
   for(const k in pieces){
     const p=pieces[k];
@@ -109,10 +113,12 @@ function canMove(pieceId, dx, dy){
   return true;
 }
 
-function movePiece(pieceId, dx, dy){
-  if(!canMove(pieceId,dx,dy)) return false;
-  pieces[pieceId].cells.forEach(c=>{c.x+=dx;c.y+=dy;});
-  return true;
+function movePiece(pieceId, dx, dy, steps=1){
+  for(let s=0;s<steps;s++){
+    if(canMove(pieceId,dx,dy)){
+      pieces[pieceId].cells.forEach(c=>{c.x+=dx;c.y+=dy;});
+    }else break;
+  }
 }
 
 function pieceAt(x,y){
@@ -141,12 +147,19 @@ canvas.addEventListener("touchend",e=>{
   if(!swipedPiece) return;
   const dx=e.changedTouches[0].clientX-startX;
   const dy=e.changedTouches[0].clientY-startY;
+  let dirX=0, dirY=0;
   if(Math.abs(dx)>Math.abs(dy)){
-    if(dx>20) movePiece(swipedPiece.id,1,0);
-    if(dx<-20) movePiece(swipedPiece.id,-1,0);
+    dirX=dx>20?1:(dx<-20?-1:0);
   }else{
-    if(dy>20) movePiece(swipedPiece.id,0,1);
-    if(dy<-20) movePiece(swipedPiece.id,0,-1);
+    dirY=dy>20?1:(dy<-20?-1:0);
+  }
+  if(dirX!==0||dirY!==0){
+    // 最大限動かす
+    let steps=0;
+    while(canMove(swipedPiece.id,dirX,dirY)){
+      movePiece(swipedPiece.id,dirX,dirY);
+      steps++;
+    }
   }
   swipedPiece=null;
   draw();
