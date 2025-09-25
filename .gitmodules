@@ -175,6 +175,6 @@
 [submodule "googolbook-lm"]
 	path = googolbook-lm
 	url = git@github.com:koteitan/googolbook-lm.git
-[submodule "iwahswap"]
-	path = iwahswap
-	url = git@github.com:koteitan/iwahswap.git
+[submodule "puzzle-graph-viz"]
+	path = puzzle-graph-viz
+	url = git@github.com:koteitan/puzzle-graph-viz.git
