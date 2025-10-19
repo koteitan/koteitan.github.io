@@ -178,3 +178,6 @@
 [submodule "puzzle-graph-viz"]
 	path = puzzle-graph-viz
 	url = git@github.com:koteitan/puzzle-graph-viz.git
+[submodule "repeat-maze"]
+	path = repeated-maze
+	url = git@github.com:koteitan/repeat-maze.git
