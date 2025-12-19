@@ -184,7 +184,7 @@
 [submodule "mojimoji"]
 	path = mojimoji
 	url = git@github.com:koteitan/mojimoji.git
-[submodule "awesome-nostr-japan"]
-	path = awesome-nostr-japan
+[submodule "beta/awesome-nostr-japan"]
+	path = beta/awesome-nostr-japan
 	url = https://github.com/koteitan/awesome-nostr-japan
 	branch = feature/apps-like
