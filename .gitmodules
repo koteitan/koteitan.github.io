@@ -181,9 +181,6 @@
 [submodule "repeat-maze"]
 	path = repeated-maze
 	url = git@github.com:koteitan/repeat-maze.git
-[submodule "mojimoji"]
-	path = mojimoji
-	url = git@github.com:koteitan/mojimoji.git
 [submodule "beta/awesome-nostr-japan"]
 	path = beta/awesome-nostr-japan
 	url = https://github.com/koteitan/awesome-nostr-japan
