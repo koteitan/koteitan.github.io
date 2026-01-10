@@ -109,9 +109,6 @@
 [submodule "staged/fractalblockmaze"]
 	path = beta/fractalblockmaze
 	url = git@github.com:koteitan/fractalblockmaze.git
-[submodule "nostr-post-checker"]
-	path = nostr-post-checker
-	url = git@github.com:koteitan/nostr-post-checker.git
 [submodule "staged/nostr-post-checker"]
 	path = beta/nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
