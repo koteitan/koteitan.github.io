@@ -1,42 +1,3 @@
-[submodule "hydraviewer"]
-	path = hydraviewer
-	url = https://github.com/koteitan/hydraviewer.git
-[submodule "yaBMS"]
-	path = yaBMS
-	url = https://github.com/koteitan/yaBMS.git
-[submodule "OrdinalMahjong"]
-	path = OrdinalMahjong
-	url = https://github.com/koteitan/OrdinalMahjong.git
-[submodule "binarychess"]
-	path = binarychess
-	url = https://github.com/koteitan/binarychess.git
-[submodule "4dsoko"]
-	path = 4dsoko
-	url = https://github.com/koteitan/4dsoko.git
-[submodule "quantumtrump"]
-	path = quantumtrump
-	url = https://github.com/koteitan/quantumtrump.git
-[submodule "treemap-js"]
-	path = treemap-js
-	url = https://github.com/koteitan/treemap-js.git
-[submodule "BeklemishevsWorms"]
-	path = BeklemishevsWorms
-	url = https://github.com/koteitan/BeklemishevsWorms.git
-[submodule "vrchecker"]
-	path = vrchecker
-	url = https://github.com/koteitan/vrchecker.git
-[submodule "cs4d"]
-	path = cs4d
-	url = https://github.com/koteitan/cs4d.git
-[submodule "4dgolf"]
-	path = 4dgolf
-	url = https://github.com/koteitan/4dgolf.git
-[submodule "idgomoku"]
-	path = idgomoku
-	url = https://github.com/koteitan/idgomoku.git
-[submodule "wobble-audio-api"]
-	path = wobble-audio-api
-	url = https://github.com/koteitan/wobble-audio-api.git
 [submodule "4D8-HACK"]
 	path = 4D8-HACK
 	url = https://github.com/koteitan/js-sprite-game.git
@@ -49,132 +10,21 @@
 	path = 4dtron
 	url = https://github.com/koteitan/4dsoko.git
 	branch = 4dtron
-[submodule "js-sprite-game"]
-	path = js-sprite-game
-	url = https://github.com/koteitan/js-sprite-game.git
-[submodule "paintgraph"]
-	path = paintgraph
-	url = https://github.com/koteitan/paintgraph.git
-[submodule "yseq"]
-	path = yseq
-	url = https://github.com/koteitan/yseq
-[submodule "akko"]
-	path = akko
-	url = https://github.com/koteitan/akko.git
-[submodule "vsakko"]
-	path = vsakko
-	url = https://github.com/koteitan/vsakko
-[submodule "bintube"]
-	path = bintube
-	url = https://github.com/koteitan/bintube.git
-[submodule "zoomdot"]
-	path = zoomdot
-	url = https://github.com/koteitan/zoomdot
-[submodule "whYmountain"]
-	path = whYmountain
-	url = https://github.com/koteitan/whYmountain
-[submodule "grzeseq"]
-	path = grzeseq
-	url = https://github.com/koteitan/grzeseq/
-[submodule "ordex"]
-	path = ordex
-	url = https://github.com/koteitan/ordex.git
-[submodule "dy"]
-	path = dbms2y
-	url = https://github.com/koteitan/DimensionalYSequenceSource.git
-[submodule "hamkyodai"]
-	path = hamkyodai
-	url = https://github.com/koteitan/Kyodai.git
-[submodule "wy"]
-	path = wy
-	url = https://github.com/koteitan/wy.git
-[submodule "kuma3arypsinum"]
-	path = kuma3arypsinum
-	url = https://github.com/koteitan/kuma3arypsinum.git
-[submodule "kumawormseq"]
-	path = kumawormseq
-	url = https://github.com/koteitan/kumawormseq.git
-[submodule "mvebh"]
-	path = mvebh
-	url = git@github.com:koteitan/mvebh.git
-[submodule "basmac2"]
-	path = basmac2
-	url = git@github.com:koteitan/basmac2.git
-[submodule "fractalblockmaze"]
-	path = fractalblockmaze
-	url = git@github.com:koteitan/fractalblockmaze.git
 [submodule "staged/fractalblockmaze"]
 	path = beta/fractalblockmaze
 	url = git@github.com:koteitan/fractalblockmaze.git
 [submodule "staged/nostr-post-checker"]
 	path = beta/nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
-[submodule "staged/nostr-tsne"]
-	path = nostr-tsne
-	url = git@github.com:koteitan/nostr-tsne.git
-[submodule "nostr-tsne"]
-	path = nostr-tsne
-	url = git@github.com:koteitan/nostr-tsne.git
-[submodule "ndsuika"]
-	path = ndsuika
-	url = git@github.com:koteitan/ndsuika.git
-[submodule "4d-pong-wars"]
-	path = 4d-pong-wars
-	url = git@github.com:koteitan/4d-pong-wars.git
 [submodule "old/nostr-post-checker"]
 	path = old/nostr-post-checker
 	url = git@github.com:koteitan/nostr-post-checker.git
-[submodule "findmine"]
-	path = findmine
-	url = git@github.com:koteitan/findmine.git
-[submodule "nostr-hex"]
-	path = nostr-hex
-	url = git@github.com:koteitan/nostr-hex.git
-[submodule "hilight"]
-	path = hilight
-	url = git@github.com:koteitan/hilight-embed.git
-[submodule "countdown"]
-	path = countdown
-	url = git@github.com:koteitan/countdown.git
 [submodule "beta/countdown"]
 	path = beta/countdown
 	url = git@github.com:koteitan/countdown.git
-[submodule "polyrhythm"]
-	path = polyrhythm
-	url = git@github.com:koteitan/polyrhythm.git
-[submodule "hello-rx-nostr"]
-	path = hello-rx-nostr
-	url = git@github.com:koteitan/hello-rx-nostr.git
 [submodule "beta/nostr-tsne"]
 	path = beta/nostr-tsne
 	url = git@github.com:koteitan/nostr-tsne.git
-[submodule "pentamaze"]
-	path = pentamaze
-	url = git@github.com:koteitan/pentation-maze.git
-[submodule "linksim"]
-	path = linksim
-	url = git@github.com:koteitan/linksim.git
-[submodule "darkmode"]
-	path = darkmode
-	url = git@github.com:koteitan/darkmode.git
-[submodule "beam"]
-	path = beam
-	url = git@github.com:koteitan/beam.git
-[submodule "harmkey"]
-	path = harmkey
-	url = git@github.com:koteitan/harmkey.git
-[submodule "keyboard"]
-	path = keyboard
-	url = git@github.com:koteitan/keyboard.git
-[submodule "googolbook-lm"]
-	path = googolbook-lm
-	url = git@github.com:koteitan/googolbook-lm.git
-[submodule "puzzle-graph-viz"]
-	path = puzzle-graph-viz
-	url = git@github.com:koteitan/puzzle-graph-viz.git
-[submodule "repeat-maze"]
-	path = repeated-maze
-	url = git@github.com:koteitan/repeat-maze.git
 [submodule "beta/awesome-nostr-japan"]
 	path = beta/awesome-nostr-japan
 	url = https://github.com/koteitan/awesome-nostr-japan
