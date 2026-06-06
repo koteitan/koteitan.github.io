@@ -52,12 +52,12 @@
 
   <section>
     <h2>1. 二重帰納法</h2>
-    <p class="sub">依存関係は積順序 ℕ×ℕ（<code>(m,n)</code> ← <code>(m−1,n)</code>, <code>(m,n−1)</code>、双方向）。だが実際の記述は<strong>入れ子</strong>：外側 m・内側 n の帰納で「列を左から順に縦に総なめ」。記述順は辞書式 <code>ω·m+n</code>（順序型 ω²）。</p>
+    <p class="sub">依存関係は積順序 ℕ×ℕ（<code>(m,n)</code> ← <code>(m−1,n)</code>, <code>(m,n−1)</code>、双方向）。実際の記述は<strong>入れ子</strong>：外側 m（行）・内側 n（列）で、各行を左→右に総なめしてから次の行へ（右→下）。記述順は辞書式 <code>ω·m+n</code>（順序型 ω²）。</p>
     <canvas id="c1"></canvas>
     <div class="legend">
       <span><span class="dot" style="background:var(--amber-fill);border-color:var(--amber)"></span>基底 (0,0)</span>
-      <span><span class="sw" style="border-color:var(--line)"></span>第1引数の依存（横）</span>
-      <span><span class="sw" style="border-color:var(--blue)"></span>第2引数の依存（縦）</span>
+      <span><span class="sw" style="border-color:var(--line)"></span>第1引数 m の依存（縦）</span>
+      <span><span class="sw" style="border-color:var(--blue)"></span>第2引数 n の依存（横）</span>
       <span style="color:#74c178"><em>ω·m+n</em>＝記述順（入れ子: 外 m / 内 n）</span>
     </div>
     <p class="cap">緑番号は<strong>実際に書く順</strong>（入れ子の総なめ＝辞書式 ω²）。一方、依存関係そのものの整礎ランクは<strong>自然和 m⊕n</strong>（反対角線、順序型 ω）で、これも妥当なスケジュールですが、無限順序数だと同じ m⊕n の組が無限の反鎖になるため、こうは書かず入れ子にします。矢印（積順序）は両方に共通の依存構造。</p>
@@ -171,29 +171,28 @@ function lexLabel(m,n){
 /* ---------- 1. double induction grid ---------- */
 (function(){
   const {ctx,w,h}=setup('c1',560,520);
-  const padL=78,padR=70,padT=44,padB=70, N=3;
-  const cellW=(w-padL-padR)/N, cellH=(h-padT-padB)/N;
-  const X=m=>padL+m*cellW;
-  const Y=n=>h-padB-(n*cellH);
+  const padL=86,padT=54,cellW=108,cellH=104, N=3;
+  const Xn=n=>padL+n*cellW;   // 列 = 第2引数 n（右へ）
+  const Ym=m=>padT+m*cellH;   // 行 = 第1引数 m（下へ）
   const P={};
-  for(let m=0;m<=N;m++)for(let n=0;n<=N;n++) P[m+","+n]={x:X(m),y:Y(n),r:21};
+  for(let m=0;m<=N;m++)for(let n=0;n<=N;n++) P[m+","+n]={x:Xn(n),y:Ym(m),r:21};
   // ghost continuation
   const gx={}, gy={};
-  for(let n=0;n<=N;n++) gx[n]={x:X(N)+cellW,y:Y(n),r:14};
-  for(let m=0;m<=N;m++) gy[m]={x:X(m),y:Y(N)-cellH,r:14};
+  for(let m=0;m<=N;m++) gx[m]={x:Xn(N)+cellW,y:Ym(m),r:14}; // 右へ続く（n増）
+  for(let n=0;n<=N;n++) gy[n]={x:Xn(n),y:Ym(N)+cellH,r:14}; // 下へ続く（m増）
   // axes labels
-  ctx.fillStyle=COL.line; ctx.font='13px "Fraunces",serif';
-  ctx.textAlign='center'; ctx.fillText('m （第1引数）', (X(0)+X(N))/2, h-22);
-  ctx.save(); ctx.translate(24,(Y(0)+Y(N))/2); ctx.rotate(-Math.PI/2);
-  ctx.fillText('n （第2引数）',0,0); ctx.restore();
-  // edges
+  ctx.fillStyle=COL.line; ctx.font='13px "Fraunces",serif'; ctx.textAlign='center';
+  ctx.fillText('n （第2引数）→', (Xn(0)+Xn(N))/2, 28);
+  ctx.save(); ctx.translate(24,(Ym(0)+Ym(N))/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('m （第1引数）↓',0,0); ctx.restore();
+  // edges: 第2引数依存(横・青) と 第1引数依存(縦・白)
   for(let m=0;m<=N;m++)for(let n=0;n<=N;n++){
-    if(m>0) edge(ctx,P[(m-1)+","+n],P[m+","+n],{color:COL.line});
     if(n>0) edge(ctx,P[m+","+(n-1)],P[m+","+n],{color:COL.blue});
+    if(m>0) edge(ctx,P[(m-1)+","+n],P[m+","+n],{color:COL.line});
   }
   // ghost arrows
-  for(let n=0;n<=N;n++) edge(ctx,P[N+","+n],gx[n],{color:COL.faint});
-  for(let m=0;m<=N;m++) edge(ctx,P[m+","+N],gy[m],{color:COL.faint});
+  for(let m=0;m<=N;m++) edge(ctx,P[m+","+N],gx[m],{color:COL.faint});
+  for(let n=0;n<=N;n++) edge(ctx,P[N+","+n],gy[n],{color:COL.faint});
   // nodes
   for(let m=0;m<=N;m++)for(let n=0;n<=N;n++){
     const base=(m===0&&n===0);
@@ -201,8 +200,8 @@ function lexLabel(m,n){
       {r:21,fs:12,fill:base?COL.amberF:COL.paper,stroke:base?COL.amber:COL.line,lw:base?2.4:1.8});
     badge(ctx,P[m+","+n].x+16,P[m+","+n].y-14,lexLabel(m,n));
   }
-  for(let n=0;n<=N;n++) node(ctx,gx[n].x,gx[n].y,"⋯",{r:14,fs:13,stroke:COL.faint,tcolor:COL.faint});
-  for(let m=0;m<=N;m++) node(ctx,gy[m].x,gy[m].y,"⋮",{r:14,fs:13,stroke:COL.faint,tcolor:COL.faint});
+  for(let m=0;m<=N;m++) node(ctx,gx[m].x,gx[m].y,"⋯",{r:14,fs:13,stroke:COL.faint,tcolor:COL.faint});
+  for(let n=0;n<=N;n++) node(ctx,gy[n].x,gy[n].y,"⋮",{r:14,fs:13,stroke:COL.faint,tcolor:COL.faint});
 })();
 
 /* ---------- 2. Ackermann argument dependency ---------- */
