@@ -1,3 +1,39 @@
+// localStorage namespace helpers
+const NS = "oyasumi";
+const lsKey = (name) => NS + ":" + name;
+function loadLegacyState() {
+    // read old un-namespaced keys (never deleted)
+    const state = {};
+    try {
+        const bedtime = localStorage.getItem('bedtime');
+        if (bedtime !== null) state.bedtime = bedtime;
+    } catch (e) {}
+    try {
+        const routines = localStorage.getItem('routines');
+        if (routines !== null) state.routines = JSON.parse(routines);
+    } catch (e) {}
+    return state;
+}
+function loadState() {
+    try {
+        const raw = localStorage.getItem(lsKey("state"));
+        if (raw !== null) {
+            const parsed = JSON.parse(raw);
+            if (parsed && typeof parsed === 'object') return parsed;
+        }
+    } catch (e) {}
+    return loadLegacyState();
+}
+// Merge a patch into the stored state. Reads storage back first so that a
+// second tab does not roll back what another tab has just saved.
+function saveState(patch) {
+    try {
+        const cur = loadState();
+        Object.assign(cur, patch);
+        localStorage.setItem(lsKey("state"), JSON.stringify(cur));
+    } catch (e) {}
+}
+
 // Sleep tips data
 const sleepTips = [
     "寝る前の1時間はスマートフォンやPCの使用を避けましょう。",
@@ -13,6 +49,7 @@ const sleepTips = [
 ];
 
 // State management
+let appState = loadState();
 let currentAudio = null;
 let bedtimeSet = false;
 let bedtimeHour = null;
@@ -62,7 +99,8 @@ function setBedtime() {
     bedtimeDisplay.style.color = 'var(--success-color)';
     
     // Save to localStorage
-    localStorage.setItem('bedtime', time);
+    appState.bedtime = time;
+    saveState({ bedtime: time });
 }
 
 // Show bedtime notification
@@ -80,9 +118,9 @@ function showBedtimeNotification() {
 
 // Load saved routines
 function loadRoutines() {
-    const savedRoutines = localStorage.getItem('routines');
+    const savedRoutines = appState.routines;
     if (savedRoutines) {
-        const routines = JSON.parse(savedRoutines);
+        const routines = savedRoutines;
         const checkboxes = routineChecklist.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(checkbox => {
             const routine = checkbox.getAttribute('data-routine');
@@ -99,7 +137,8 @@ function saveRoutines() {
         const routine = checkbox.getAttribute('data-routine');
         routines[routine] = checkbox.checked;
     });
-    localStorage.setItem('routines', JSON.stringify(routines));
+    appState.routines = routines;
+    saveState({ routines: routines });
 }
 
 // Create audio for sleep sounds
@@ -237,7 +276,7 @@ function init() {
     setInterval(updateTime, 1000);
     
     // Load saved data
-    const savedBedtime = localStorage.getItem('bedtime');
+    const savedBedtime = appState.bedtime;
     if (savedBedtime) {
         bedtimeInput.value = savedBedtime;
         setBedtime();

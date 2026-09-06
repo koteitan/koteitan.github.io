@@ -3,6 +3,31 @@
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon.jpg">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
+// localStorage namespace helpers
+var NS = "noseyme";
+var lsKey = function(name){ return NS + ":" + name; };
+function loadLegacyState(){
+  // read old un-namespaced keys (never deleted)
+  var state = {};
+  try{
+    var pubkey = localStorage.getItem("pubkey");
+    if(pubkey!==null) state.pubkey = pubkey;
+  }catch(e){}
+  return state;
+}
+function loadState(){
+  try{
+    var raw = localStorage.getItem(lsKey("state"));
+    if(raw!==null){
+      var parsed = JSON.parse(raw);
+      if(parsed && typeof parsed==="object") return parsed;
+    }
+  }catch(e){}
+  return loadLegacyState();
+}
+function saveState(state){
+  try{ localStorage.setItem(lsKey("state"), JSON.stringify(state)); }catch(e){}
+}
 var search = function(){
 	var q;
   if(form0.pubkey.value!=""){
@@ -10,7 +35,7 @@ var search = function(){
   }else{
     q = encodeURIComponent(form0.word.value);
   }
-  localStorage.setItem("pubkey",form0.pubkey.value);
+  saveState({pubkey: form0.pubkey.value});
 	location.href = "https://nosey.vercel.app/?q=" + q;
 }
 //</script>
@@ -24,9 +49,9 @@ from:<br>
 </form>
 <script>
 window.onload=function(){
-  var p = localStorage.getItem("pubkey");
-  if(p!==null){
-    form0.pubkey.value = p;
+  var st = loadState();
+  if(st.pubkey!==undefined && st.pubkey!==null){
+    form0.pubkey.value = st.pubkey;
   }
   document.getElementById("word").focus();
 }
